@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolverSearch | Human Search Engine</title>
+    <style>
+        :root {
+            /* Colors sampled from your UI */
+            --bg-deep: #0b1120; /* Deep navy background */
+            --card-bg: #151e2f; /* Slightly lighter navy for cards */
+            --accent-blue: #38bdf8; /* Bright cyan/blue from your buttons */
+            --accent-glow: rgba(56, 189, 248, 0.3);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            /* Subtle radial gradient to match your app's depth */
+            background: radial-gradient(circle at top right, #1e293b 0%, #0b1120 100%);
+        }
+
+        /* The "Glow" effects from your UI */
+        .glow-sphere {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            filter: blur(60px);
+            opacity: 0.5;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            padding: 4rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            max-width: 650px;
+            width: 90%;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+            text-transform: uppercase;
+            font-weight: 800;
+        }
+
+        .tagline {
+            color: var(--accent-blue);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 2.5rem;
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 20px;
+        }
+
+        p {
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Countdown Grid - matching your card styling */
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            padding: 1.5rem 0.5rem;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .time-box:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .time-value {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .time-label {
+            font-size: 0.65rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .launch-btn {
+            background-color: var(--accent-blue);
+            color: #000;
+            text-decoration: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 14px 0 var(--accent-glow);
+            transition: all 0.2s ease;
+        }
+
+        .launch-btn:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .footer {
+            margin-top: 3.5rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-sphere" style="top: -20%; left: -10%;"></div>
+    <div class="glow-sphere" style="bottom: -20%; right: -10%;"></div>
+
+    <div class="container">
+        <div class="logo-area">
+            <h1>SOLVERSEARCH</h1>
+        </div>
+        
+        <div class="tagline">Human Search Engine</div>
+        
+        <p>The next evolution of expert discovery is almost here. Access the top evaluated minds in B2B SaaS, Research, and Engineering.</p>
+
+        <div class="countdown" id="timer">
+            <div class="time-box">
+                <span class="time-value" id="days">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="hours">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="minutes">00</span>
+                <span class="time-label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="time-value" id="seconds">00</span>
+                <span class="time-label">Secs</span>
+            </div>
+        </div>
+
+        <a href="#" class="launch-btn">NOTIFY ME ON LAUNCH</a>
+
+        <div class="footer">
+            MVP Launching June 01, 2026 • System Status: Optimizing
+        </div>
+    </div>
+
+    <script>
+        const launchDate = new Date("June 1, 2026 00:00:00").getTime();
+
+        const updateTimer = () => {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(interval);
+                document.getElementById("timer").innerHTML = "<div style='grid-column: span 4; color: var(--accent-blue); font-weight: bold;'>SYSTEM IS LIVE</div>";
+            }
+        };
+
+        const interval = setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+</html>
