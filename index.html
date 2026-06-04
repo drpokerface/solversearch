@@ -24,7 +24,7 @@
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -63,7 +63,7 @@
             color: var(--text-dim);
             line-height: 1.6;
             font-size: 1.3rem;
-            margin-bottom: 3.5rem;
+            margin-bottom: 2.5rem;
         }
 
         /* Increased blue coloring for key phrases */
@@ -76,6 +76,71 @@
         .highlight-bright {
             color: var(--accent-blue-bright);
             font-weight: 500;
+        }
+
+        /* --- Waitlist form (matches existing pill / glow aesthetic) --- */
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-width: 360px;
+            margin: 0 auto 1rem auto;
+        }
+
+        .waitlist-form input {
+            width: 100%;
+            padding: 0.9rem 1.4rem;
+            border-radius: 50px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .waitlist-form input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .waitlist-form input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        .waitlist-form button {
+            width: 100%;
+            margin-top: 0.25rem;
+            padding: 0.9rem 1.4rem;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--accent-blue);
+            color: var(--bg-deep);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.2s ease;
+        }
+
+        .waitlist-form button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 22px rgba(56, 189, 248, 0.55);
+        }
+
+        .waitlist-form button:disabled {
+            opacity: 0.6;
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .form-message {
+            color: var(--accent-blue-bright);
+            font-size: 0.95rem;
+            min-height: 1.3rem;
+            margin-bottom: 2.5rem;
+            transition: opacity 0.3s ease;
         }
 
         /* A clean, glowing pill for the launch text */
@@ -154,11 +219,57 @@
         
         <p class="description">
             Stop searching <span class="highlight-bright">start solving</span><br>
-            <!-- <span class="highlight">start solving</span> -->
         </p>
+
+        <form class="waitlist-form" id="waitlistForm">
+            <input type="text" id="name" name="Name" placeholder="Your name" required>
+            <input type="email" id="email" name="Email" placeholder="Email address" required>
+            <input type="tel" id="phone" name="Phone" placeholder="Phone number" required>
+            <button type="submit">Join waitlist</button>
+        </form>
+        <p class="form-message" id="formMessage"></p>
         
         <div class="launch-badge">launching soon</div>
     </div>
+
+    <script>
+        // 1. Paste your Google Apps Script Web app URL between the quotes below.
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxkR2R0Lw8GUK4PbPfKFJVwU9_a9WZIT_raJrmvdrNzwyNdeKl6BHG8WeFwOVufUlaE/exec';
+
+        const form = document.getElementById('waitlistForm');
+        const message = document.getElementById('formMessage');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            if (!name || !email || !phone) return;
+
+            const button = form.querySelector('button');
+            button.disabled = true;
+            button.textContent = 'Joining...';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                // Keys MUST match your sheet headers exactly: Name, Email, Phone
+                body: new URLSearchParams({ Name: name, Email: email, Phone: phone })
+            })
+            .then(function () {
+                message.textContent = "You're on the list. We'll be in touch.";
+                form.reset();
+            })
+            .catch(function () {
+                message.textContent = 'Something went wrong — please try again.';
+            })
+            .finally(function () {
+                button.disabled = false;
+                button.textContent = 'Join waitlist';
+            });
+        });
+    </script>
 
 </body>
 </html>
