@@ -738,7 +738,7 @@
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
-            const countryCode = document.getElementById('countryCode').value;
+            const countryCode = document.getElementById('countryCode').value.replace('+', '');
             // Join the chosen country code onto the typed number (only if a number was entered).
             const fullPhone = phone ? countryCode + ' ' + phone : '';
             if (!name || !email) return;
