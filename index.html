@@ -422,8 +422,8 @@
             Stop Searching. <span class="highlight-bright">Start Solving.</span><br>
         </p>
         <form class="waitlist-form reveal" id="waitlistForm">
-            <input type="text" id="name" name="Name" placeholder="Your name *" required>
-            <input type="email" id="email" name="Email" placeholder="Email address *" required>
+            <input type="text" id="name" name="Name" placeholder="Your name " required>
+            <input type="email" id="email" name="Email" placeholder="Email address " required>
             <div class="phone-row">
                 <div class="country-select" id="countrySelect">
                     <input type="hidden" id="countryCode" name="CountryCode" value="+1">
@@ -433,31 +433,206 @@
                         <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <ul class="country-list" id="countryList" role="listbox" aria-label="Country code">
-                        <li role="option" aria-selected="true" class="selected" data-code="+1" data-flag="us"><img class="flag" src="https://flagcdn.com/us.svg" alt="" width="22" height="15"><span class="name">United States</span><span class="code">+1</span></li>
-                        <li role="option" data-code="+44" data-flag="gb"><img class="flag" src="https://flagcdn.com/gb.svg" alt="" width="22" height="15"><span class="name">United Kingdom</span><span class="code">+44</span></li>
-                        <li role="option" data-code="+91" data-flag="in"><img class="flag" src="https://flagcdn.com/in.svg" alt="" width="22" height="15"><span class="name">India</span><span class="code">+91</span></li>
-                        <li role="option" data-code="+61" data-flag="au"><img class="flag" src="https://flagcdn.com/au.svg" alt="" width="22" height="15"><span class="name">Australia</span><span class="code">+61</span></li>
-                        <li role="option" data-code="+49" data-flag="de"><img class="flag" src="https://flagcdn.com/de.svg" alt="" width="22" height="15"><span class="name">Germany</span><span class="code">+49</span></li>
-                        <li role="option" data-code="+33" data-flag="fr"><img class="flag" src="https://flagcdn.com/fr.svg" alt="" width="22" height="15"><span class="name">France</span><span class="code">+33</span></li>
-                        <li role="option" data-code="+34" data-flag="es"><img class="flag" src="https://flagcdn.com/es.svg" alt="" width="22" height="15"><span class="name">Spain</span><span class="code">+34</span></li>
-                        <li role="option" data-code="+39" data-flag="it"><img class="flag" src="https://flagcdn.com/it.svg" alt="" width="22" height="15"><span class="name">Italy</span><span class="code">+39</span></li>
-                        <li role="option" data-code="+31" data-flag="nl"><img class="flag" src="https://flagcdn.com/nl.svg" alt="" width="22" height="15"><span class="name">Netherlands</span><span class="code">+31</span></li>
-                        <li role="option" data-code="+353" data-flag="ie"><img class="flag" src="https://flagcdn.com/ie.svg" alt="" width="22" height="15"><span class="name">Ireland</span><span class="code">+353</span></li>
-                        <li role="option" data-code="+41" data-flag="ch"><img class="flag" src="https://flagcdn.com/ch.svg" alt="" width="22" height="15"><span class="name">Switzerland</span><span class="code">+41</span></li>
-                        <li role="option" data-code="+46" data-flag="se"><img class="flag" src="https://flagcdn.com/se.svg" alt="" width="22" height="15"><span class="name">Sweden</span><span class="code">+46</span></li>
-                        <li role="option" data-code="+47" data-flag="no"><img class="flag" src="https://flagcdn.com/no.svg" alt="" width="22" height="15"><span class="name">Norway</span><span class="code">+47</span></li>
-                        <li role="option" data-code="+971" data-flag="ae"><img class="flag" src="https://flagcdn.com/ae.svg" alt="" width="22" height="15"><span class="name">United Arab Emirates</span><span class="code">+971</span></li>
-                        <li role="option" data-code="+966" data-flag="sa"><img class="flag" src="https://flagcdn.com/sa.svg" alt="" width="22" height="15"><span class="name">Saudi Arabia</span><span class="code">+966</span></li>
-                        <li role="option" data-code="+65" data-flag="sg"><img class="flag" src="https://flagcdn.com/sg.svg" alt="" width="22" height="15"><span class="name">Singapore</span><span class="code">+65</span></li>
-                        <li role="option" data-code="+852" data-flag="hk"><img class="flag" src="https://flagcdn.com/hk.svg" alt="" width="22" height="15"><span class="name">Hong Kong</span><span class="code">+852</span></li>
-                        <li role="option" data-code="+81" data-flag="jp"><img class="flag" src="https://flagcdn.com/jp.svg" alt="" width="22" height="15"><span class="name">Japan</span><span class="code">+81</span></li>
-                        <li role="option" data-code="+82" data-flag="kr"><img class="flag" src="https://flagcdn.com/kr.svg" alt="" width="22" height="15"><span class="name">South Korea</span><span class="code">+82</span></li>
-                        <li role="option" data-code="+86" data-flag="cn"><img class="flag" src="https://flagcdn.com/cn.svg" alt="" width="22" height="15"><span class="name">China</span><span class="code">+86</span></li>
-                        <li role="option" data-code="+55" data-flag="br"><img class="flag" src="https://flagcdn.com/br.svg" alt="" width="22" height="15"><span class="name">Brazil</span><span class="code">+55</span></li>
-                        <li role="option" data-code="+27" data-flag="za"><img class="flag" src="https://flagcdn.com/za.svg" alt="" width="22" height="15"><span class="name">South Africa</span><span class="code">+27</span></li>
-                        <li role="option" data-code="+234" data-flag="ng"><img class="flag" src="https://flagcdn.com/ng.svg" alt="" width="22" height="15"><span class="name">Nigeria</span><span class="code">+234</span></li>
-                        <li role="option" data-code="+254" data-flag="ke"><img class="flag" src="https://flagcdn.com/ke.svg" alt="" width="22" height="15"><span class="name">Kenya</span><span class="code">+254</span></li>
-                    </ul>
+    <li role="option" data-code="+93" data-flag="af"><img class="flag" src="https://flagcdn.com/af.svg" alt="" width="22" height="15"><span class="name">Afghanistan</span><span class="code">+93</span></li>
+    <li role="option" data-code="+355" data-flag="al"><img class="flag" src="https://flagcdn.com/al.svg" alt="" width="22" height="15"><span class="name">Albania</span><span class="code">+355</span></li>
+    <li role="option" data-code="+213" data-flag="dz"><img class="flag" src="https://flagcdn.com/dz.svg" alt="" width="22" height="15"><span class="name">Algeria</span><span class="code">+213</span></li>
+    <li role="option" data-code="+376" data-flag="ad"><img class="flag" src="https://flagcdn.com/ad.svg" alt="" width="22" height="15"><span class="name">Andorra</span><span class="code">+376</span></li>
+    <li role="option" data-code="+244" data-flag="ao"><img class="flag" src="https://flagcdn.com/ao.svg" alt="" width="22" height="15"><span class="name">Angola</span><span class="code">+244</span></li>
+    <li role="option" data-code="+1" data-flag="ag"><img class="flag" src="https://flagcdn.com/ag.svg" alt="" width="22" height="15"><span class="name">Antigua and Barbuda</span><span class="code">+1</span></li>
+    <li role="option" data-code="+54" data-flag="ar"><img class="flag" src="https://flagcdn.com/ar.svg" alt="" width="22" height="15"><span class="name">Argentina</span><span class="code">+54</span></li>
+    <li role="option" data-code="+374" data-flag="am"><img class="flag" src="https://flagcdn.com/am.svg" alt="" width="22" height="15"><span class="name">Armenia</span><span class="code">+374</span></li>
+    <li role="option" data-code="+61" data-flag="au"><img class="flag" src="https://flagcdn.com/au.svg" alt="" width="22" height="15"><span class="name">Australia</span><span class="code">+61</span></li>
+    <li role="option" data-code="+43" data-flag="at"><img class="flag" src="https://flagcdn.com/at.svg" alt="" width="22" height="15"><span class="name">Austria</span><span class="code">+43</span></li>
+    <li role="option" data-code="+994" data-flag="az"><img class="flag" src="https://flagcdn.com/az.svg" alt="" width="22" height="15"><span class="name">Azerbaijan</span><span class="code">+994</span></li>
+    <li role="option" data-code="+1" data-flag="bs"><img class="flag" src="https://flagcdn.com/bs.svg" alt="" width="22" height="15"><span class="name">Bahamas</span><span class="code">+1</span></li>
+    <li role="option" data-code="+973" data-flag="bh"><img class="flag" src="https://flagcdn.com/bh.svg" alt="" width="22" height="15"><span class="name">Bahrain</span><span class="code">+973</span></li>
+    <li role="option" data-code="+880" data-flag="bd"><img class="flag" src="https://flagcdn.com/bd.svg" alt="" width="22" height="15"><span class="name">Bangladesh</span><span class="code">+880</span></li>
+    <li role="option" data-code="+1" data-flag="bb"><img class="flag" src="https://flagcdn.com/bb.svg" alt="" width="22" height="15"><span class="name">Barbados</span><span class="code">+1</span></li>
+    <li role="option" data-code="+375" data-flag="by"><img class="flag" src="https://flagcdn.com/by.svg" alt="" width="22" height="15"><span class="name">Belarus</span><span class="code">+375</span></li>
+    <li role="option" data-code="+32" data-flag="be"><img class="flag" src="https://flagcdn.com/be.svg" alt="" width="22" height="15"><span class="name">Belgium</span><span class="code">+32</span></li>
+    <li role="option" data-code="+501" data-flag="bz"><img class="flag" src="https://flagcdn.com/bz.svg" alt="" width="22" height="15"><span class="name">Belize</span><span class="code">+501</span></li>
+    <li role="option" data-code="+229" data-flag="bj"><img class="flag" src="https://flagcdn.com/bj.svg" alt="" width="22" height="15"><span class="name">Benin</span><span class="code">+229</span></li>
+    <li role="option" data-code="+975" data-flag="bt"><img class="flag" src="https://flagcdn.com/bt.svg" alt="" width="22" height="15"><span class="name">Bhutan</span><span class="code">+975</span></li>
+    <li role="option" data-code="+591" data-flag="bo"><img class="flag" src="https://flagcdn.com/bo.svg" alt="" width="22" height="15"><span class="name">Bolivia</span><span class="code">+591</span></li>
+    <li role="option" data-code="+387" data-flag="ba"><img class="flag" src="https://flagcdn.com/ba.svg" alt="" width="22" height="15"><span class="name">Bosnia and Herzegovina</span><span class="code">+387</span></li>
+    <li role="option" data-code="+267" data-flag="bw"><img class="flag" src="https://flagcdn.com/bw.svg" alt="" width="22" height="15"><span class="name">Botswana</span><span class="code">+267</span></li>
+    <li role="option" data-code="+55" data-flag="br"><img class="flag" src="https://flagcdn.com/br.svg" alt="" width="22" height="15"><span class="name">Brazil</span><span class="code">+55</span></li>
+    <li role="option" data-code="+673" data-flag="bn"><img class="flag" src="https://flagcdn.com/bn.svg" alt="" width="22" height="15"><span class="name">Brunei</span><span class="code">+673</span></li>
+    <li role="option" data-code="+359" data-flag="bg"><img class="flag" src="https://flagcdn.com/bg.svg" alt="" width="22" height="15"><span class="name">Bulgaria</span><span class="code">+359</span></li>
+    <li role="option" data-code="+226" data-flag="bf"><img class="flag" src="https://flagcdn.com/bf.svg" alt="" width="22" height="15"><span class="name">Burkina Faso</span><span class="code">+226</span></li>
+    <li role="option" data-code="+257" data-flag="bi"><img class="flag" src="https://flagcdn.com/bi.svg" alt="" width="22" height="15"><span class="name">Burundi</span><span class="code">+257</span></li>
+    <li role="option" data-code="+855" data-flag="kh"><img class="flag" src="https://flagcdn.com/kh.svg" alt="" width="22" height="15"><span class="name">Cambodia</span><span class="code">+855</span></li>
+    <li role="option" data-code="+237" data-flag="cm"><img class="flag" src="https://flagcdn.com/cm.svg" alt="" width="22" height="15"><span class="name">Cameroon</span><span class="code">+237</span></li>
+    <li role="option" data-code="+1" data-flag="ca"><img class="flag" src="https://flagcdn.com/ca.svg" alt="" width="22" height="15"><span class="name">Canada</span><span class="code">+1</span></li>
+    <li role="option" data-code="+238" data-flag="cv"><img class="flag" src="https://flagcdn.com/cv.svg" alt="" width="22" height="15"><span class="name">Cape Verde</span><span class="code">+238</span></li>
+    <li role="option" data-code="+236" data-flag="cf"><img class="flag" src="https://flagcdn.com/cf.svg" alt="" width="22" height="15"><span class="name">Central African Republic</span><span class="code">+236</span></li>
+    <li role="option" data-code="+235" data-flag="td"><img class="flag" src="https://flagcdn.com/td.svg" alt="" width="22" height="15"><span class="name">Chad</span><span class="code">+235</span></li>
+    <li role="option" data-code="+56" data-flag="cl"><img class="flag" src="https://flagcdn.com/cl.svg" alt="" width="22" height="15"><span class="name">Chile</span><span class="code">+56</span></li>
+    <li role="option" data-code="+86" data-flag="cn"><img class="flag" src="https://flagcdn.com/cn.svg" alt="" width="22" height="15"><span class="name">China</span><span class="code">+86</span></li>
+    <li role="option" data-code="+57" data-flag="co"><img class="flag" src="https://flagcdn.com/co.svg" alt="" width="22" height="15"><span class="name">Colombia</span><span class="code">+57</span></li>
+    <li role="option" data-code="+269" data-flag="km"><img class="flag" src="https://flagcdn.com/km.svg" alt="" width="22" height="15"><span class="name">Comoros</span><span class="code">+269</span></li>
+    <li role="option" data-code="+243" data-flag="cd"><img class="flag" src="https://flagcdn.com/cd.svg" alt="" width="22" height="15"><span class="name">Congo (Dem. Rep.)</span><span class="code">+243</span></li>
+    <li role="option" data-code="+242" data-flag="cg"><img class="flag" src="https://flagcdn.com/cg.svg" alt="" width="22" height="15"><span class="name">Congo (Rep.)</span><span class="code">+242</span></li>
+    <li role="option" data-code="+506" data-flag="cr"><img class="flag" src="https://flagcdn.com/cr.svg" alt="" width="22" height="15"><span class="name">Costa Rica</span><span class="code">+506</span></li>
+    <li role="option" data-code="+225" data-flag="ci"><img class="flag" src="https://flagcdn.com/ci.svg" alt="" width="22" height="15"><span class="name">Côte d'Ivoire</span><span class="code">+225</span></li>
+    <li role="option" data-code="+385" data-flag="hr"><img class="flag" src="https://flagcdn.com/hr.svg" alt="" width="22" height="15"><span class="name">Croatia</span><span class="code">+385</span></li>
+    <li role="option" data-code="+53" data-flag="cu"><img class="flag" src="https://flagcdn.com/cu.svg" alt="" width="22" height="15"><span class="name">Cuba</span><span class="code">+53</span></li>
+    <li role="option" data-code="+357" data-flag="cy"><img class="flag" src="https://flagcdn.com/cy.svg" alt="" width="22" height="15"><span class="name">Cyprus</span><span class="code">+357</span></li>
+    <li role="option" data-code="+420" data-flag="cz"><img class="flag" src="https://flagcdn.com/cz.svg" alt="" width="22" height="15"><span class="name">Czech Republic</span><span class="code">+420</span></li>
+    <li role="option" data-code="+45" data-flag="dk"><img class="flag" src="https://flagcdn.com/dk.svg" alt="" width="22" height="15"><span class="name">Denmark</span><span class="code">+45</span></li>
+    <li role="option" data-code="+253" data-flag="dj"><img class="flag" src="https://flagcdn.com/dj.svg" alt="" width="22" height="15"><span class="name">Djibouti</span><span class="code">+253</span></li>
+    <li role="option" data-code="+1" data-flag="dm"><img class="flag" src="https://flagcdn.com/dm.svg" alt="" width="22" height="15"><span class="name">Dominica</span><span class="code">+1</span></li>
+    <li role="option" data-code="+1" data-flag="do"><img class="flag" src="https://flagcdn.com/do.svg" alt="" width="22" height="15"><span class="name">Dominican Republic</span><span class="code">+1</span></li>
+    <li role="option" data-code="+593" data-flag="ec"><img class="flag" src="https://flagcdn.com/ec.svg" alt="" width="22" height="15"><span class="name">Ecuador</span><span class="code">+593</span></li>
+    <li role="option" data-code="+20" data-flag="eg"><img class="flag" src="https://flagcdn.com/eg.svg" alt="" width="22" height="15"><span class="name">Egypt</span><span class="code">+20</span></li>
+    <li role="option" data-code="+503" data-flag="sv"><img class="flag" src="https://flagcdn.com/sv.svg" alt="" width="22" height="15"><span class="name">El Salvador</span><span class="code">+503</span></li>
+    <li role="option" data-code="+240" data-flag="gq"><img class="flag" src="https://flagcdn.com/gq.svg" alt="" width="22" height="15"><span class="name">Equatorial Guinea</span><span class="code">+240</span></li>
+    <li role="option" data-code="+291" data-flag="er"><img class="flag" src="https://flagcdn.com/er.svg" alt="" width="22" height="15"><span class="name">Eritrea</span><span class="code">+291</span></li>
+    <li role="option" data-code="+372" data-flag="ee"><img class="flag" src="https://flagcdn.com/ee.svg" alt="" width="22" height="15"><span class="name">Estonia</span><span class="code">+372</span></li>
+    <li role="option" data-code="+268" data-flag="sz"><img class="flag" src="https://flagcdn.com/sz.svg" alt="" width="22" height="15"><span class="name">Eswatini</span><span class="code">+268</span></li>
+    <li role="option" data-code="+251" data-flag="et"><img class="flag" src="https://flagcdn.com/et.svg" alt="" width="22" height="15"><span class="name">Ethiopia</span><span class="code">+251</span></li>
+    <li role="option" data-code="+679" data-flag="fj"><img class="flag" src="https://flagcdn.com/fj.svg" alt="" width="22" height="15"><span class="name">Fiji</span><span class="code">+679</span></li>
+    <li role="option" data-code="+358" data-flag="fi"><img class="flag" src="https://flagcdn.com/fi.svg" alt="" width="22" height="15"><span class="name">Finland</span><span class="code">+358</span></li>
+    <li role="option" data-code="+33" data-flag="fr"><img class="flag" src="https://flagcdn.com/fr.svg" alt="" width="22" height="15"><span class="name">France</span><span class="code">+33</span></li>
+    <li role="option" data-code="+241" data-flag="ga"><img class="flag" src="https://flagcdn.com/ga.svg" alt="" width="22" height="15"><span class="name">Gabon</span><span class="code">+241</span></li>
+    <li role="option" data-code="+220" data-flag="gm"><img class="flag" src="https://flagcdn.com/gm.svg" alt="" width="22" height="15"><span class="name">Gambia</span><span class="code">+220</span></li>
+    <li role="option" data-code="+995" data-flag="ge"><img class="flag" src="https://flagcdn.com/ge.svg" alt="" width="22" height="15"><span class="name">Georgia</span><span class="code">+995</span></li>
+    <li role="option" data-code="+49" data-flag="de"><img class="flag" src="https://flagcdn.com/de.svg" alt="" width="22" height="15"><span class="name">Germany</span><span class="code">+49</span></li>
+    <li role="option" data-code="+233" data-flag="gh"><img class="flag" src="https://flagcdn.com/gh.svg" alt="" width="22" height="15"><span class="name">Ghana</span><span class="code">+233</span></li>
+    <li role="option" data-code="+30" data-flag="gr"><img class="flag" src="https://flagcdn.com/gr.svg" alt="" width="22" height="15"><span class="name">Greece</span><span class="code">+30</span></li>
+    <li role="option" data-code="+1" data-flag="gd"><img class="flag" src="https://flagcdn.com/gd.svg" alt="" width="22" height="15"><span class="name">Grenada</span><span class="code">+1</span></li>
+    <li role="option" data-code="+502" data-flag="gt"><img class="flag" src="https://flagcdn.com/gt.svg" alt="" width="22" height="15"><span class="name">Guatemala</span><span class="code">+502</span></li>
+    <li role="option" data-code="+224" data-flag="gn"><img class="flag" src="https://flagcdn.com/gn.svg" alt="" width="22" height="15"><span class="name">Guinea</span><span class="code">+224</span></li>
+    <li role="option" data-code="+245" data-flag="gw"><img class="flag" src="https://flagcdn.com/gw.svg" alt="" width="22" height="15"><span class="name">Guinea-Bissau</span><span class="code">+245</span></li>
+    <li role="option" data-code="+592" data-flag="gy"><img class="flag" src="https://flagcdn.com/gy.svg" alt="" width="22" height="15"><span class="name">Guyana</span><span class="code">+592</span></li>
+    <li role="option" data-code="+509" data-flag="ht"><img class="flag" src="https://flagcdn.com/ht.svg" alt="" width="22" height="15"><span class="name">Haiti</span><span class="code">+509</span></li>
+    <li role="option" data-code="+504" data-flag="hn"><img class="flag" src="https://flagcdn.com/hn.svg" alt="" width="22" height="15"><span class="name">Honduras</span><span class="code">+504</span></li>
+    <li role="option" data-code="+852" data-flag="hk"><img class="flag" src="https://flagcdn.com/hk.svg" alt="" width="22" height="15"><span class="name">Hong Kong</span><span class="code">+852</span></li>
+    <li role="option" data-code="+36" data-flag="hu"><img class="flag" src="https://flagcdn.com/hu.svg" alt="" width="22" height="15"><span class="name">Hungary</span><span class="code">+36</span></li>
+    <li role="option" data-code="+354" data-flag="is"><img class="flag" src="https://flagcdn.com/is.svg" alt="" width="22" height="15"><span class="name">Iceland</span><span class="code">+354</span></li>
+    <li role="option" data-code="+91" data-flag="in"><img class="flag" src="https://flagcdn.com/in.svg" alt="" width="22" height="15"><span class="name">India</span><span class="code">+91</span></li>
+    <li role="option" data-code="+62" data-flag="id"><img class="flag" src="https://flagcdn.com/id.svg" alt="" width="22" height="15"><span class="name">Indonesia</span><span class="code">+62</span></li>
+    <li role="option" data-code="+98" data-flag="ir"><img class="flag" src="https://flagcdn.com/ir.svg" alt="" width="22" height="15"><span class="name">Iran</span><span class="code">+98</span></li>
+    <li role="option" data-code="+964" data-flag="iq"><img class="flag" src="https://flagcdn.com/iq.svg" alt="" width="22" height="15"><span class="name">Iraq</span><span class="code">+964</span></li>
+    <li role="option" data-code="+353" data-flag="ie"><img class="flag" src="https://flagcdn.com/ie.svg" alt="" width="22" height="15"><span class="name">Ireland</span><span class="code">+353</span></li>
+    <li role="option" data-code="+972" data-flag="il"><img class="flag" src="https://flagcdn.com/il.svg" alt="" width="22" height="15"><span class="name">Israel</span><span class="code">+972</span></li>
+    <li role="option" data-code="+39" data-flag="it"><img class="flag" src="https://flagcdn.com/it.svg" alt="" width="22" height="15"><span class="name">Italy</span><span class="code">+39</span></li>
+    <li role="option" data-code="+1" data-flag="jm"><img class="flag" src="https://flagcdn.com/jm.svg" alt="" width="22" height="15"><span class="name">Jamaica</span><span class="code">+1</span></li>
+    <li role="option" data-code="+81" data-flag="jp"><img class="flag" src="https://flagcdn.com/jp.svg" alt="" width="22" height="15"><span class="name">Japan</span><span class="code">+81</span></li>
+    <li role="option" data-code="+962" data-flag="jo"><img class="flag" src="https://flagcdn.com/jo.svg" alt="" width="22" height="15"><span class="name">Jordan</span><span class="code">+962</span></li>
+    <li role="option" data-code="+7" data-flag="kz"><img class="flag" src="https://flagcdn.com/kz.svg" alt="" width="22" height="15"><span class="name">Kazakhstan</span><span class="code">+7</span></li>
+    <li role="option" data-code="+254" data-flag="ke"><img class="flag" src="https://flagcdn.com/ke.svg" alt="" width="22" height="15"><span class="name">Kenya</span><span class="code">+254</span></li>
+    <li role="option" data-code="+686" data-flag="ki"><img class="flag" src="https://flagcdn.com/ki.svg" alt="" width="22" height="15"><span class="name">Kiribati</span><span class="code">+686</span></li>
+    <li role="option" data-code="+383" data-flag="xk"><img class="flag" src="https://flagcdn.com/xk.svg" alt="" width="22" height="15"><span class="name">Kosovo</span><span class="code">+383</span></li>
+    <li role="option" data-code="+965" data-flag="kw"><img class="flag" src="https://flagcdn.com/kw.svg" alt="" width="22" height="15"><span class="name">Kuwait</span><span class="code">+965</span></li>
+    <li role="option" data-code="+996" data-flag="kg"><img class="flag" src="https://flagcdn.com/kg.svg" alt="" width="22" height="15"><span class="name">Kyrgyzstan</span><span class="code">+996</span></li>
+    <li role="option" data-code="+856" data-flag="la"><img class="flag" src="https://flagcdn.com/la.svg" alt="" width="22" height="15"><span class="name">Laos</span><span class="code">+856</span></li>
+    <li role="option" data-code="+371" data-flag="lv"><img class="flag" src="https://flagcdn.com/lv.svg" alt="" width="22" height="15"><span class="name">Latvia</span><span class="code">+371</span></li>
+    <li role="option" data-code="+961" data-flag="lb"><img class="flag" src="https://flagcdn.com/lb.svg" alt="" width="22" height="15"><span class="name">Lebanon</span><span class="code">+961</span></li>
+    <li role="option" data-code="+266" data-flag="ls"><img class="flag" src="https://flagcdn.com/ls.svg" alt="" width="22" height="15"><span class="name">Lesotho</span><span class="code">+266</span></li>
+    <li role="option" data-code="+231" data-flag="lr"><img class="flag" src="https://flagcdn.com/lr.svg" alt="" width="22" height="15"><span class="name">Liberia</span><span class="code">+231</span></li>
+    <li role="option" data-code="+218" data-flag="ly"><img class="flag" src="https://flagcdn.com/ly.svg" alt="" width="22" height="15"><span class="name">Libya</span><span class="code">+218</span></li>
+    <li role="option" data-code="+423" data-flag="li"><img class="flag" src="https://flagcdn.com/li.svg" alt="" width="22" height="15"><span class="name">Liechtenstein</span><span class="code">+423</span></li>
+    <li role="option" data-code="+370" data-flag="lt"><img class="flag" src="https://flagcdn.com/lt.svg" alt="" width="22" height="15"><span class="name">Lithuania</span><span class="code">+370</span></li>
+    <li role="option" data-code="+352" data-flag="lu"><img class="flag" src="https://flagcdn.com/lu.svg" alt="" width="22" height="15"><span class="name">Luxembourg</span><span class="code">+352</span></li>
+    <li role="option" data-code="+853" data-flag="mo"><img class="flag" src="https://flagcdn.com/mo.svg" alt="" width="22" height="15"><span class="name">Macau</span><span class="code">+853</span></li>
+    <li role="option" data-code="+261" data-flag="mg"><img class="flag" src="https://flagcdn.com/mg.svg" alt="" width="22" height="15"><span class="name">Madagascar</span><span class="code">+261</span></li>
+    <li role="option" data-code="+265" data-flag="mw"><img class="flag" src="https://flagcdn.com/mw.svg" alt="" width="22" height="15"><span class="name">Malawi</span><span class="code">+265</span></li>
+    <li role="option" data-code="+60" data-flag="my"><img class="flag" src="https://flagcdn.com/my.svg" alt="" width="22" height="15"><span class="name">Malaysia</span><span class="code">+60</span></li>
+    <li role="option" data-code="+960" data-flag="mv"><img class="flag" src="https://flagcdn.com/mv.svg" alt="" width="22" height="15"><span class="name">Maldives</span><span class="code">+960</span></li>
+    <li role="option" data-code="+223" data-flag="ml"><img class="flag" src="https://flagcdn.com/ml.svg" alt="" width="22" height="15"><span class="name">Mali</span><span class="code">+223</span></li>
+    <li role="option" data-code="+356" data-flag="mt"><img class="flag" src="https://flagcdn.com/mt.svg" alt="" width="22" height="15"><span class="name">Malta</span><span class="code">+356</span></li>
+    <li role="option" data-code="+692" data-flag="mh"><img class="flag" src="https://flagcdn.com/mh.svg" alt="" width="22" height="15"><span class="name">Marshall Islands</span><span class="code">+692</span></li>
+    <li role="option" data-code="+222" data-flag="mr"><img class="flag" src="https://flagcdn.com/mr.svg" alt="" width="22" height="15"><span class="name">Mauritania</span><span class="code">+222</span></li>
+    <li role="option" data-code="+230" data-flag="mu"><img class="flag" src="https://flagcdn.com/mu.svg" alt="" width="22" height="15"><span class="name">Mauritius</span><span class="code">+230</span></li>
+    <li role="option" data-code="+52" data-flag="mx"><img class="flag" src="https://flagcdn.com/mx.svg" alt="" width="22" height="15"><span class="name">Mexico</span><span class="code">+52</span></li>
+    <li role="option" data-code="+691" data-flag="fm"><img class="flag" src="https://flagcdn.com/fm.svg" alt="" width="22" height="15"><span class="name">Micronesia</span><span class="code">+691</span></li>
+    <li role="option" data-code="+373" data-flag="md"><img class="flag" src="https://flagcdn.com/md.svg" alt="" width="22" height="15"><span class="name">Moldova</span><span class="code">+373</span></li>
+    <li role="option" data-code="+377" data-flag="mc"><img class="flag" src="https://flagcdn.com/mc.svg" alt="" width="22" height="15"><span class="name">Monaco</span><span class="code">+377</span></li>
+    <li role="option" data-code="+976" data-flag="mn"><img class="flag" src="https://flagcdn.com/mn.svg" alt="" width="22" height="15"><span class="name">Mongolia</span><span class="code">+976</span></li>
+    <li role="option" data-code="+382" data-flag="me"><img class="flag" src="https://flagcdn.com/me.svg" alt="" width="22" height="15"><span class="name">Montenegro</span><span class="code">+382</span></li>
+    <li role="option" data-code="+212" data-flag="ma"><img class="flag" src="https://flagcdn.com/ma.svg" alt="" width="22" height="15"><span class="name">Morocco</span><span class="code">+212</span></li>
+    <li role="option" data-code="+258" data-flag="mz"><img class="flag" src="https://flagcdn.com/mz.svg" alt="" width="22" height="15"><span class="name">Mozambique</span><span class="code">+258</span></li>
+    <li role="option" data-code="+95" data-flag="mm"><img class="flag" src="https://flagcdn.com/mm.svg" alt="" width="22" height="15"><span class="name">Myanmar</span><span class="code">+95</span></li>
+    <li role="option" data-code="+264" data-flag="na"><img class="flag" src="https://flagcdn.com/na.svg" alt="" width="22" height="15"><span class="name">Namibia</span><span class="code">+264</span></li>
+    <li role="option" data-code="+674" data-flag="nr"><img class="flag" src="https://flagcdn.com/nr.svg" alt="" width="22" height="15"><span class="name">Nauru</span><span class="code">+674</span></li>
+    <li role="option" data-code="+977" data-flag="np"><img class="flag" src="https://flagcdn.com/np.svg" alt="" width="22" height="15"><span class="name">Nepal</span><span class="code">+977</span></li>
+    <li role="option" data-code="+31" data-flag="nl"><img class="flag" src="https://flagcdn.com/nl.svg" alt="" width="22" height="15"><span class="name">Netherlands</span><span class="code">+31</span></li>
+    <li role="option" data-code="+64" data-flag="nz"><img class="flag" src="https://flagcdn.com/nz.svg" alt="" width="22" height="15"><span class="name">New Zealand</span><span class="code">+64</span></li>
+    <li role="option" data-code="+505" data-flag="ni"><img class="flag" src="https://flagcdn.com/ni.svg" alt="" width="22" height="15"><span class="name">Nicaragua</span><span class="code">+505</span></li>
+    <li role="option" data-code="+227" data-flag="ne"><img class="flag" src="https://flagcdn.com/ne.svg" alt="" width="22" height="15"><span class="name">Niger</span><span class="code">+227</span></li>
+    <li role="option" data-code="+234" data-flag="ng"><img class="flag" src="https://flagcdn.com/ng.svg" alt="" width="22" height="15"><span class="name">Nigeria</span><span class="code">+234</span></li>
+    <li role="option" data-code="+850" data-flag="kp"><img class="flag" src="https://flagcdn.com/kp.svg" alt="" width="22" height="15"><span class="name">North Korea</span><span class="code">+850</span></li>
+    <li role="option" data-code="+389" data-flag="mk"><img class="flag" src="https://flagcdn.com/mk.svg" alt="" width="22" height="15"><span class="name">North Macedonia</span><span class="code">+389</span></li>
+    <li role="option" data-code="+47" data-flag="no"><img class="flag" src="https://flagcdn.com/no.svg" alt="" width="22" height="15"><span class="name">Norway</span><span class="code">+47</span></li>
+    <li role="option" data-code="+968" data-flag="om"><img class="flag" src="https://flagcdn.com/om.svg" alt="" width="22" height="15"><span class="name">Oman</span><span class="code">+968</span></li>
+    <li role="option" data-code="+92" data-flag="pk"><img class="flag" src="https://flagcdn.com/pk.svg" alt="" width="22" height="15"><span class="name">Pakistan</span><span class="code">+92</span></li>
+    <li role="option" data-code="+680" data-flag="pw"><img class="flag" src="https://flagcdn.com/pw.svg" alt="" width="22" height="15"><span class="name">Palau</span><span class="code">+680</span></li>
+    <li role="option" data-code="+970" data-flag="ps"><img class="flag" src="https://flagcdn.com/ps.svg" alt="" width="22" height="15"><span class="name">Palestine</span><span class="code">+970</span></li>
+    <li role="option" data-code="+507" data-flag="pa"><img class="flag" src="https://flagcdn.com/pa.svg" alt="" width="22" height="15"><span class="name">Panama</span><span class="code">+507</span></li>
+    <li role="option" data-code="+675" data-flag="pg"><img class="flag" src="https://flagcdn.com/pg.svg" alt="" width="22" height="15"><span class="name">Papua New Guinea</span><span class="code">+675</span></li>
+    <li role="option" data-code="+595" data-flag="py"><img class="flag" src="https://flagcdn.com/py.svg" alt="" width="22" height="15"><span class="name">Paraguay</span><span class="code">+595</span></li>
+    <li role="option" data-code="+51" data-flag="pe"><img class="flag" src="https://flagcdn.com/pe.svg" alt="" width="22" height="15"><span class="name">Peru</span><span class="code">+51</span></li>
+    <li role="option" data-code="+63" data-flag="ph"><img class="flag" src="https://flagcdn.com/ph.svg" alt="" width="22" height="15"><span class="name">Philippines</span><span class="code">+63</span></li>
+    <li role="option" data-code="+48" data-flag="pl"><img class="flag" src="https://flagcdn.com/pl.svg" alt="" width="22" height="15"><span class="name">Poland</span><span class="code">+48</span></li>
+    <li role="option" data-code="+351" data-flag="pt"><img class="flag" src="https://flagcdn.com/pt.svg" alt="" width="22" height="15"><span class="name">Portugal</span><span class="code">+351</span></li>
+    <li role="option" data-code="+974" data-flag="qa"><img class="flag" src="https://flagcdn.com/qa.svg" alt="" width="22" height="15"><span class="name">Qatar</span><span class="code">+974</span></li>
+    <li role="option" data-code="+40" data-flag="ro"><img class="flag" src="https://flagcdn.com/ro.svg" alt="" width="22" height="15"><span class="name">Romania</span><span class="code">+40</span></li>
+    <li role="option" data-code="+7" data-flag="ru"><img class="flag" src="https://flagcdn.com/ru.svg" alt="" width="22" height="15"><span class="name">Russia</span><span class="code">+7</span></li>
+    <li role="option" data-code="+250" data-flag="rw"><img class="flag" src="https://flagcdn.com/rw.svg" alt="" width="22" height="15"><span class="name">Rwanda</span><span class="code">+250</span></li>
+    <li role="option" data-code="+1" data-flag="kn"><img class="flag" src="https://flagcdn.com/kn.svg" alt="" width="22" height="15"><span class="name">Saint Kitts and Nevis</span><span class="code">+1</span></li>
+    <li role="option" data-code="+1" data-flag="lc"><img class="flag" src="https://flagcdn.com/lc.svg" alt="" width="22" height="15"><span class="name">Saint Lucia</span><span class="code">+1</span></li>
+    <li role="option" data-code="+1" data-flag="vc"><img class="flag" src="https://flagcdn.com/vc.svg" alt="" width="22" height="15"><span class="name">Saint Vincent and the Grenadines</span><span class="code">+1</span></li>
+    <li role="option" data-code="+685" data-flag="ws"><img class="flag" src="https://flagcdn.com/ws.svg" alt="" width="22" height="15"><span class="name">Samoa</span><span class="code">+685</span></li>
+    <li role="option" data-code="+378" data-flag="sm"><img class="flag" src="https://flagcdn.com/sm.svg" alt="" width="22" height="15"><span class="name">San Marino</span><span class="code">+378</span></li>
+    <li role="option" data-code="+239" data-flag="st"><img class="flag" src="https://flagcdn.com/st.svg" alt="" width="22" height="15"><span class="name">São Tomé and Príncipe</span><span class="code">+239</span></li>
+    <li role="option" data-code="+966" data-flag="sa"><img class="flag" src="https://flagcdn.com/sa.svg" alt="" width="22" height="15"><span class="name">Saudi Arabia</span><span class="code">+966</span></li>
+    <li role="option" data-code="+221" data-flag="sn"><img class="flag" src="https://flagcdn.com/sn.svg" alt="" width="22" height="15"><span class="name">Senegal</span><span class="code">+221</span></li>
+    <li role="option" data-code="+381" data-flag="rs"><img class="flag" src="https://flagcdn.com/rs.svg" alt="" width="22" height="15"><span class="name">Serbia</span><span class="code">+381</span></li>
+    <li role="option" data-code="+248" data-flag="sc"><img class="flag" src="https://flagcdn.com/sc.svg" alt="" width="22" height="15"><span class="name">Seychelles</span><span class="code">+248</span></li>
+    <li role="option" data-code="+232" data-flag="sl"><img class="flag" src="https://flagcdn.com/sl.svg" alt="" width="22" height="15"><span class="name">Sierra Leone</span><span class="code">+232</span></li>
+    <li role="option" data-code="+65" data-flag="sg"><img class="flag" src="https://flagcdn.com/sg.svg" alt="" width="22" height="15"><span class="name">Singapore</span><span class="code">+65</span></li>
+    <li role="option" data-code="+421" data-flag="sk"><img class="flag" src="https://flagcdn.com/sk.svg" alt="" width="22" height="15"><span class="name">Slovakia</span><span class="code">+421</span></li>
+    <li role="option" data-code="+386" data-flag="si"><img class="flag" src="https://flagcdn.com/si.svg" alt="" width="22" height="15"><span class="name">Slovenia</span><span class="code">+386</span></li>
+    <li role="option" data-code="+677" data-flag="sb"><img class="flag" src="https://flagcdn.com/sb.svg" alt="" width="22" height="15"><span class="name">Solomon Islands</span><span class="code">+677</span></li>
+    <li role="option" data-code="+252" data-flag="so"><img class="flag" src="https://flagcdn.com/so.svg" alt="" width="22" height="15"><span class="name">Somalia</span><span class="code">+252</span></li>
+    <li role="option" data-code="+27" data-flag="za"><img class="flag" src="https://flagcdn.com/za.svg" alt="" width="22" height="15"><span class="name">South Africa</span><span class="code">+27</span></li>
+    <li role="option" data-code="+82" data-flag="kr"><img class="flag" src="https://flagcdn.com/kr.svg" alt="" width="22" height="15"><span class="name">South Korea</span><span class="code">+82</span></li>
+    <li role="option" data-code="+211" data-flag="ss"><img class="flag" src="https://flagcdn.com/ss.svg" alt="" width="22" height="15"><span class="name">South Sudan</span><span class="code">+211</span></li>
+    <li role="option" data-code="+34" data-flag="es"><img class="flag" src="https://flagcdn.com/es.svg" alt="" width="22" height="15"><span class="name">Spain</span><span class="code">+34</span></li>
+    <li role="option" data-code="+94" data-flag="lk"><img class="flag" src="https://flagcdn.com/lk.svg" alt="" width="22" height="15"><span class="name">Sri Lanka</span><span class="code">+94</span></li>
+    <li role="option" data-code="+249" data-flag="sd"><img class="flag" src="https://flagcdn.com/sd.svg" alt="" width="22" height="15"><span class="name">Sudan</span><span class="code">+249</span></li>
+    <li role="option" data-code="+597" data-flag="sr"><img class="flag" src="https://flagcdn.com/sr.svg" alt="" width="22" height="15"><span class="name">Suriname</span><span class="code">+597</span></li>
+    <li role="option" data-code="+46" data-flag="se"><img class="flag" src="https://flagcdn.com/se.svg" alt="" width="22" height="15"><span class="name">Sweden</span><span class="code">+46</span></li>
+    <li role="option" data-code="+41" data-flag="ch"><img class="flag" src="https://flagcdn.com/ch.svg" alt="" width="22" height="15"><span class="name">Switzerland</span><span class="code">+41</span></li>
+    <li role="option" data-code="+963" data-flag="sy"><img class="flag" src="https://flagcdn.com/sy.svg" alt="" width="22" height="15"><span class="name">Syria</span><span class="code">+963</span></li>
+    <li role="option" data-code="+886" data-flag="tw"><img class="flag" src="https://flagcdn.com/tw.svg" alt="" width="22" height="15"><span class="name">Taiwan</span><span class="code">+886</span></li>
+    <li role="option" data-code="+992" data-flag="tj"><img class="flag" src="https://flagcdn.com/tj.svg" alt="" width="22" height="15"><span class="name">Tajikistan</span><span class="code">+992</span></li>
+    <li role="option" data-code="+255" data-flag="tz"><img class="flag" src="https://flagcdn.com/tz.svg" alt="" width="22" height="15"><span class="name">Tanzania</span><span class="code">+255</span></li>
+    <li role="option" data-code="+66" data-flag="th"><img class="flag" src="https://flagcdn.com/th.svg" alt="" width="22" height="15"><span class="name">Thailand</span><span class="code">+66</span></li>
+    <li role="option" data-code="+670" data-flag="tl"><img class="flag" src="https://flagcdn.com/tl.svg" alt="" width="22" height="15"><span class="name">Timor-Leste</span><span class="code">+670</span></li>
+    <li role="option" data-code="+228" data-flag="tg"><img class="flag" src="https://flagcdn.com/tg.svg" alt="" width="22" height="15"><span class="name">Togo</span><span class="code">+228</span></li>
+    <li role="option" data-code="+676" data-flag="to"><img class="flag" src="https://flagcdn.com/to.svg" alt="" width="22" height="15"><span class="name">Tonga</span><span class="code">+676</span></li>
+    <li role="option" data-code="+1" data-flag="tt"><img class="flag" src="https://flagcdn.com/tt.svg" alt="" width="22" height="15"><span class="name">Trinidad and Tobago</span><span class="code">+1</span></li>
+    <li role="option" data-code="+216" data-flag="tn"><img class="flag" src="https://flagcdn.com/tn.svg" alt="" width="22" height="15"><span class="name">Tunisia</span><span class="code">+216</span></li>
+    <li role="option" data-code="+90" data-flag="tr"><img class="flag" src="https://flagcdn.com/tr.svg" alt="" width="22" height="15"><span class="name">Turkey</span><span class="code">+90</span></li>
+    <li role="option" data-code="+993" data-flag="tm"><img class="flag" src="https://flagcdn.com/tm.svg" alt="" width="22" height="15"><span class="name">Turkmenistan</span><span class="code">+993</span></li>
+    <li role="option" data-code="+688" data-flag="tv"><img class="flag" src="https://flagcdn.com/tv.svg" alt="" width="22" height="15"><span class="name">Tuvalu</span><span class="code">+688</span></li>
+    <li role="option" data-code="+256" data-flag="ug"><img class="flag" src="https://flagcdn.com/ug.svg" alt="" width="22" height="15"><span class="name">Uganda</span><span class="code">+256</span></li>
+    <li role="option" data-code="+380" data-flag="ua"><img class="flag" src="https://flagcdn.com/ua.svg" alt="" width="22" height="15"><span class="name">Ukraine</span><span class="code">+380</span></li>
+    <li role="option" data-code="+971" data-flag="ae"><img class="flag" src="https://flagcdn.com/ae.svg" alt="" width="22" height="15"><span class="name">United Arab Emirates</span><span class="code">+971</span></li>
+    <li role="option" data-code="+44" data-flag="gb"><img class="flag" src="https://flagcdn.com/gb.svg" alt="" width="22" height="15"><span class="name">United Kingdom</span><span class="code">+44</span></li>
+    <li role="option" aria-selected="true" class="selected" data-code="+1" data-flag="us"><img class="flag" src="https://flagcdn.com/us.svg" alt="" width="22" height="15"><span class="name">United States</span><span class="code">+1</span></li>
+    <li role="option" data-code="+598" data-flag="uy"><img class="flag" src="https://flagcdn.com/uy.svg" alt="" width="22" height="15"><span class="name">Uruguay</span><span class="code">+598</span></li>
+    <li role="option" data-code="+998" data-flag="uz"><img class="flag" src="https://flagcdn.com/uz.svg" alt="" width="22" height="15"><span class="name">Uzbekistan</span><span class="code">+998</span></li>
+    <li role="option" data-code="+678" data-flag="vu"><img class="flag" src="https://flagcdn.com/vu.svg" alt="" width="22" height="15"><span class="name">Vanuatu</span><span class="code">+678</span></li>
+    <li role="option" data-code="+39" data-flag="va"><img class="flag" src="https://flagcdn.com/va.svg" alt="" width="22" height="15"><span class="name">Vatican City</span><span class="code">+39</span></li>
+    <li role="option" data-code="+58" data-flag="ve"><img class="flag" src="https://flagcdn.com/ve.svg" alt="" width="22" height="15"><span class="name">Venezuela</span><span class="code">+58</span></li>
+    <li role="option" data-code="+84" data-flag="vn"><img class="flag" src="https://flagcdn.com/vn.svg" alt="" width="22" height="15"><span class="name">Vietnam</span><span class="code">+84</span></li>
+    <li role="option" data-code="+967" data-flag="ye"><img class="flag" src="https://flagcdn.com/ye.svg" alt="" width="22" height="15"><span class="name">Yemen</span><span class="code">+967</span></li>
+    <li role="option" data-code="+260" data-flag="zm"><img class="flag" src="https://flagcdn.com/zm.svg" alt="" width="22" height="15"><span class="name">Zambia</span><span class="code">+260</span></li>
+    <li role="option" data-code="+263" data-flag="zw"><img class="flag" src="https://flagcdn.com/zw.svg" alt="" width="22" height="15"><span class="name">Zimbabwe</span><span class="code">+263</span></li>
+</ul>
                 </div>
                 <input type="tel" id="phone" name="Phone" placeholder="Phone number (optional)">
             </div>
