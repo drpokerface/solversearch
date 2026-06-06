@@ -238,7 +238,25 @@
             transform: translateY(0);
             pointer-events: auto;
         }
-        .country-list li {
+        .country-search {
+            position: sticky;
+            top: 0;
+            background: #111a2b;
+            padding: 0.3rem 0.4rem 0.5rem;
+            z-index: 2;
+        }
+        .country-search input {
+            width: 100%;
+            padding: 0.55rem 0.8rem;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .country-search input::placeholder { color: var(--text-dim); }
+        .country-list li[role="option"] {
             display: flex;
             align-items: center;
             gap: 0.7rem;
@@ -257,10 +275,10 @@
             color: var(--text-dim);
             font-size: 0.88rem;
         }
-        .country-list li:hover {
+        .country-list li[role="option"]:hover {
             background-color: rgba(56, 189, 248, 0.14);
         }
-        .country-list li.selected {
+        .country-list li[role="option"].selected {
             background-color: rgba(56, 189, 248, 0.10);
         }
         .country-list li.selected .code {
@@ -433,6 +451,7 @@
                         <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </button>
                     <ul class="country-list" id="countryList" role="listbox" aria-label="Country code">
+                    <li class="country-search"><input type="text" id="countrySearch" placeholder="Search country..." autocomplete="off"></li>
     <li role="option" data-code="+93" data-flag="af"><img class="flag" src="https://flagcdn.com/af.svg" alt="" width="22" height="15"><span class="name">Afghanistan</span><span class="code">+93</span></li>
     <li role="option" data-code="+355" data-flag="al"><img class="flag" src="https://flagcdn.com/al.svg" alt="" width="22" height="15"><span class="name">Albania</span><span class="code">+355</span></li>
     <li role="option" data-code="+213" data-flag="dz"><img class="flag" src="https://flagcdn.com/dz.svg" alt="" width="22" height="15"><span class="name">Algeria</span><span class="code">+213</span></li>
@@ -662,6 +681,8 @@
             const hidden = document.getElementById('countryCode');
             const triggerFlag = trigger.querySelector('.flag');
             const triggerDial = trigger.querySelector('.dial');
+            const search = document.getElementById('countrySearch');
+            const options = list.querySelectorAll('li[role="option"]');
 
             function close() {
                 wrap.classList.remove('open');
@@ -670,17 +691,20 @@
             function open() {
                 wrap.classList.add('open');
                 trigger.setAttribute('aria-expanded', 'true');
+                search.value = '';
+                options.forEach(function (li) { li.style.display = ''; });
+                setTimeout(function () { search.focus(); }, 0);
             }
             trigger.addEventListener('click', function (e) {
                 e.stopPropagation();
                 wrap.classList.contains('open') ? close() : open();
             });
-            list.querySelectorAll('li').forEach(function (li) {
+            list.querySelectorAll('li[role="option"]').forEach(function (li) {
                 li.addEventListener('click', function () {
                     hidden.value = li.getAttribute('data-code');
                     triggerDial.textContent = li.getAttribute('data-code');
                     triggerFlag.src = 'https://flagcdn.com/' + li.getAttribute('data-flag') + '.svg';
-                    list.querySelectorAll('li').forEach(function (o) {
+                    list.querySelectorAll('li[role="option"]').forEach(function (o) {
                         o.classList.remove('selected');
                         o.setAttribute('aria-selected', 'false');
                     });
@@ -689,6 +713,13 @@
                     close();
                 });
             });
+            search.addEventListener('input', function () {
+                const q = this.value.trim().toLowerCase();
+                options.forEach(function (li) {
+                    const name = li.querySelector('.name').textContent.toLowerCase();
+                    li.style.display = (name.includes(q) || li.getAttribute('data-code').includes(q)) ? '' : 'none';
+                });
+            })
             document.addEventListener('click', function (e) {
                 if (!wrap.contains(e.target)) close();
             });
@@ -711,7 +742,7 @@
             // Join the chosen country code onto the typed number (only if a number was entered).
             const fullPhone = phone ? countryCode + ' ' + phone : '';
             if (!name || !email) return;
-            const button = form.querySelector('button');
+            const button = form.querySelector('button[type="submit"]');
             button.disabled = true;
             button.textContent = 'Joining...';
             fetch(SCRIPT_URL, {
@@ -722,7 +753,9 @@
             })
             .then(function () {
                 message.textContent = "You're on the list. We'll be in touch.";
-                form.reset();
+                document.getElementById('name').value = '';
+                document.getElementById('email').value = '';
+                document.getElementById('phone').value = '';
             })
             .catch(function () {
                 message.textContent = 'Something went wrong - please try again.';
