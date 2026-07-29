@@ -655,6 +655,7 @@
                 </div>
                 <input type="tel" id="phone" name="Phone" placeholder="Phone number (optional)">
             </div>
+            <input type="text" id="occupation" name="Occupation" placeholder="Occupation (optional)">
             <button type="submit">Join waitlist</button>
         </form>
         <p class="form-message reveal" id="formMessage"></p>
@@ -738,6 +739,7 @@
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
+            const occupation = document.getElementById('occupation').value.trim();
             const countryCode = document.getElementById('countryCode').value.replace('+', '');
             // Join the chosen country code onto the typed number (only if a number was entered).
             const fullPhone = phone ? countryCode + ' ' + phone : '';
@@ -748,14 +750,15 @@
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                // Keys MUST match your sheet headers exactly: Name, Email, Phone
-                body: new URLSearchParams({ Name: name, Email: email, Phone: fullPhone })
+                // Keys MUST match your sheet headers exactly: Name, Email, Phone, Occupation
+                body: new URLSearchParams({ Name: name, Email: email, Phone: fullPhone, Occupation: occupation })
             })
             .then(function () {
                 message.textContent = "You're on the list. We'll be in touch.";
                 document.getElementById('name').value = '';
                 document.getElementById('email').value = '';
                 document.getElementById('phone').value = '';
+                document.getElementById('occupation').value = '';
             })
             .catch(function () {
                 message.textContent = 'Something went wrong - please try again.';
