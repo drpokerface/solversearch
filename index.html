@@ -488,6 +488,7 @@ footer { position: relative; z-index: 1; border-top: 1px solid var(--line-soft);
 .modal input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(56,189,248,.12); }
 .modal input::placeholder { color: var(--dim-2); letter-spacing: .05em; font-weight: 500; }
 .modal .btn-primary { width: 100%; }
+.modal .modal-cta { margin-top: 22px; }
 .modal-err { display: none; font-size: .82rem; color: #f87171; margin-top: 2px; }
 .modal.shake { animation: shake .45s ease; }
 @keyframes shake { 20%, 60% { transform: translateX(-7px); } 40%, 80% { transform: translateX(7px); } }
@@ -627,6 +628,7 @@ html[data-theme="light"] {
 .founder-card {
   background: var(--card); border: 1px solid var(--line);
   border-radius: var(--radius); padding: 30px 28px;
+  display: flex; flex-direction: column;
   transition: transform .3s ease, border-color .3s ease, background .3s ease;
 }
 .founder-card:hover { transform: translateY(-5px); border-color: rgba(56,189,248,.35); background: var(--card-strong); }
@@ -634,7 +636,7 @@ html[data-theme="light"] {
 .founder-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text-bright); letter-spacing: -.01em; display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 9px; }
 .founder-card .f-role { margin-left: 0; }
 .founder-card p { color: var(--dim); font-size: .92rem; margin-top: 10px; }
-.founder-card .f-mail { margin-top: 14px; }
+.founder-card .f-mail { margin-top: auto; padding-top: 14px; align-self: flex-start; }
 
 /* ---------- Theme toggle (footer, deliberately low-key) ---------- */
 .theme-toggle {
@@ -1090,10 +1092,10 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <div class="faq-a"><div class="faq-a-inner">SolverSearch is a <b>decision intelligence platform</b>. You describe a problem in plain language; it identifies the right experts, software tools, and agencies for it, ranks them by SolverScore, and helps you compare options and generate structured, decision-ready insights.</div></div>
       </div>
       <div class="faq-item reveal">
-        <button class="faq-q" aria-expanded="false">How is it different from ChatGPT or Perplexity?
+        <button class="faq-q" aria-expanded="false">How is it different from ChatGPT?
           <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">Most AI tools focus on <b>answering questions</b> — they summarize information. SolverSearch focuses on <b>helping you decide</b>: it maps markets, compares real entities (people, products, firms), and ends with ranked options you can actually contact or adopt, not just a paragraph.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">It starts with the data: SolverSearch reaches sources that general chatbots simply can't, so you're choosing from the <b>whole market</b> — not just the slice a model happens to remember. From there, every search runs through a <b>rigorously tested pipeline</b> that maps the landscape, weighs real people, products, and firms, and ends with a ranked shortlist you can act on. ChatGPT hands you a well-written summary; SolverSearch hands you <b>a decision, not a reading list</b>.</div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q" aria-expanded="false">Who is SolverSearch for?
@@ -1131,7 +1133,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <button class="faq-q" aria-expanded="false">How do I get access?
           <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
-        <div class="faq-a"><div class="faq-a-inner">SolverSearch is in <b>private beta</b>. <a href="waitlist.html" style="color:var(--accent-2);font-weight:600">Join the waitlist</a> for early access — invites go out in waves. If you already have a beta access code, you can use it via the <b>Beta access</b> link in the footer.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">SolverSearch is in <b>private beta</b>. <a href="waitlist.html" style="color:var(--accent-2);font-weight:600">Join the waitlist</a> for early access — invites go out in waves. If you already have a beta access code, you can use it via the <b>Beta</b> link in the footer.</div></div>
       </div>
     </div>
   </div>
@@ -1159,19 +1161,19 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
     </div>
     <div class="about-grid" data-stagger>
       <div class="founder-card reveal">
-        <div class="f-av g1">Di</div>
+        <div class="f-av g1">DK</div>
         <h3>Dinesh <span class="f-role">Co-founder &middot; CEO</span></h3>
         <p>Dinesh sets the direction &mdash; strategy, positioning, partnerships, and the final call on what SolverSearch should become. His job is making sure everything we build stays useful to the people it's built for.</p>
         <a class="f-mail" href="mailto:dinesh@solversearch.com">dinesh@solversearch.com</a>
       </div>
       <div class="founder-card reveal">
-        <div class="f-av g2">An</div>
+        <div class="f-av g2">AP</div>
         <h3>Anivrut <span class="f-role">Co-founder &middot; CFO</span></h3>
         <p>Anivrut runs the financial engine &mdash; modelling, fundraising, and investor relations. He keeps the ambition funded and the growth honest, so the company scales as sustainably as it searches.</p>
         <a class="f-mail" href="mailto:anivrut@solversearch.com">anivrut@solversearch.com</a>
       </div>
       <div class="founder-card reveal">
-        <div class="f-av g3">Ad</div>
+        <div class="f-av g3">AS</div>
         <h3>Aditya <span class="f-role">Co-founder &middot; CTO</span></h3>
         <p>Aditya builds the platform &mdash; search, SolverScore, and the AI matching engine. He turns research methodology into working software: a product you can type a real problem into and trust what comes back.</p>
         <a class="f-mail" href="mailto:aditya@solversearch.com">aditya@solversearch.com</a>
@@ -1197,13 +1199,14 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
           <a href="#how">How it works</a>
           <a href="#solverscore">SolverScore</a>
           <a href="#use-cases">Use cases</a>
+          <button class="beta-link" data-beta>Beta</button>
         </div>
         <div class="foot-col">
           <h4>Company</h4>
           <a href="#about">About us</a>
           <a href="#faq">FAQ</a>
           <a href="waitlist.html">Join the waitlist</a>
-          <button class="beta-link" data-beta>Beta access</button>
+          <button class="beta-link" data-careers>Careers</button>
         </div>
       </div>
     </div>
@@ -1245,13 +1248,28 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
   </div>
 </div>
 
+<div class="modal-overlay" id="careersModal" role="dialog" aria-modal="true" aria-labelledby="careersTitle">
+  <div class="modal">
+    <button class="modal-close" id="careersClose" aria-label="Close">&#10005;</button>
+    <div class="m-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="13" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/></svg>
+    </div>
+    <h3 id="careersTitle">Careers at SolverSearch</h3>
+    <p>We're a small founding team building the decision intelligence platform &mdash; and we're always keen to meet people who want to build it with us. Send a few lines about yourself, what you'd love to work on, and your CV.</p>
+    <div class="modal-cta">
+      <a class="btn btn-primary" href="mailto:dinesh@solversearch.com?subject=Applying%20to%20SolverSearch">Apply by email <span class="arrow">&rarr;</span></a>
+    </div>
+    <p class="modal-waitlist">Applications go to <a href="mailto:dinesh@solversearch.com">dinesh@solversearch.com</a>.</p>
+  </div>
+</div>
+
 <div class="modal-overlay" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle">
   <div class="modal contact-modal">
     <button class="modal-close" id="contactClose" aria-label="Close">&#10005;</button>
     <h3 id="contactTitle">Contact us</h3>
     <p>Questions, ideas, partnerships &mdash; reach any of us directly.</p>
     <div class="founder-row">
-      <div class="f-av g1">Di</div>
+      <div class="f-av g1">DK</div>
       <div>
         <div><span class="f-name">Dinesh</span><span class="f-role">Co-founder &middot; CEO</span></div>
         <p class="f-desc">Vision, strategy and partnerships &mdash; the big-picture conversations.</p>
@@ -1259,7 +1277,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
       </div>
     </div>
     <div class="founder-row">
-      <div class="f-av g2">An</div>
+      <div class="f-av g2">AP</div>
       <div>
         <div><span class="f-name">Anivrut</span><span class="f-role">Co-founder &middot; CFO</span></div>
         <p class="f-desc">Finance, fundraising and investor relations &mdash; the numbers.</p>
@@ -1267,7 +1285,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
       </div>
     </div>
     <div class="founder-row">
-      <div class="f-av g3">Ad</div>
+      <div class="f-av g3">AS</div>
       <div>
         <div><span class="f-name">Aditya</span><span class="f-role">Co-founder &middot; CTO</span></div>
         <p class="f-desc">Product and engineering &mdash; how SolverSearch is built.</p>
@@ -1570,7 +1588,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
   document.querySelectorAll('[data-beta]').forEach(function (b) { b.addEventListener('click', openModal); });
   document.getElementById('betaClose').addEventListener('click', closeModal);
   overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeModal(); closeContact(); } });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { closeModal(); closeContact(); closeCareers(); } });
   function h(s) {
     var x = 5381;
     for (var i = 0; i < s.length; i++) x = ((x * 33) + s.charCodeAt(i)) >>> 0;
@@ -1589,6 +1607,14 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
       input.select();
     }
   });
+
+  /* Careers modal */
+  var crOverlay = document.getElementById('careersModal');
+  function openCareers() { crOverlay.classList.add('open'); }
+  function closeCareers() { crOverlay.classList.remove('open'); }
+  document.querySelectorAll('[data-careers]').forEach(function (b) { b.addEventListener('click', openCareers); });
+  document.getElementById('careersClose').addEventListener('click', closeCareers);
+  crOverlay.addEventListener('click', function (e) { if (e.target === crOverlay) closeCareers(); });
 
   /* Contact modal */
   var cOverlay = document.getElementById('contactModal');
