@@ -367,6 +367,19 @@ h1 .tint { background: linear-gradient(115deg, var(--accent-2), var(--accent) 60
 .factor-fill { height: 100%; width: 0; border-radius: 99px; background: linear-gradient(90deg, var(--accent-deep), var(--accent-2)); transition: width 1.3s cubic-bezier(.22,.61,.36,1); }
 .in .factor-fill { width: var(--w); }
 .factor p { font-size: .78rem; color: var(--dim-2); margin-top: 6px; }
+
+/* SolverScore dynamic re-weighting demo */
+.ss-query { max-width: 640px; margin: 44px auto 0; text-align: center; }
+.ss-query-label { font-size: .72rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--dim-2); margin-bottom: 12px; }
+.ss-query-bar {
+  display: flex; gap: 10px; align-items: center; text-align: left;
+  background: var(--query-bg); border: 1px solid var(--line-soft); border-radius: 12px;
+  padding: 13px 16px; font-size: .92rem; color: var(--text); font-weight: 500;
+}
+.ss-query-bar svg { flex-shrink: 0; color: var(--accent); }
+.ss-query-text { transition: opacity .35s ease, transform .35s ease; }
+.ss-query-text.out { opacity: 0; transform: translateY(7px); }
+.ss-query-cap { margin-top: 11px; font-size: .78rem; color: var(--dim-2); }
 .ss-notes { margin-top: 26px; display: flex; flex-direction: column; gap: 10px; }
 .ss-note { display: flex; gap: 10px; align-items: flex-start; font-size: .88rem; color: var(--dim); }
 .ss-note svg { flex-shrink: 0; margin-top: 3px; color: var(--accent); }
@@ -940,6 +953,14 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
       <h2>Ranked by trust,<br>not <span class="tint">popularity.</span></h2>
       <p class="section-sub">Every expert, tool, and agency gets a dynamic 0–1000 SolverScore — a living measure of how relevant, responsive, and reliable they really are. Not who paid for placement.</p>
     </div>
+    <div class="ss-query reveal">
+      <div class="ss-query-label">Example query</div>
+      <div class="ss-query-bar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <span class="ss-query-text" id="ssQueryText">I want to open an online store for my bakery &mdash; where do I start?</span>
+      </div>
+      <div class="ss-query-cap">SolverScore re-weighs every factor for the problem at hand &mdash; watch the mix shift.</div>
+    </div>
     <div class="ss-grid">
       <div class="ss-visual reveal" id="bigRingBox">
         <div class="big-ring">
@@ -1047,7 +1068,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <div class="uc-who">Startup founders</div>
         <div class="uc-q">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          &ldquo;I need to hire senior engineers in Eastern Europe on a seed budget.&rdquo;
+          &ldquo;We're shipping too slowly &mdash; and I can't tell if it's a people problem or a process problem.&rdquo;
         </div>
         <p>Skip the £1,000-per-call expert networks. Get the specific practitioners, tools, and firms for your exact stage — in one search.</p>
       </div>
@@ -1055,7 +1076,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <div class="uc-who">Small business owners</div>
         <div class="uc-q">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          &ldquo;I need legal help structuring my company for a second market.&rdquo;
+          &ldquo;I want to take my business into a second market, but I don't know what that takes &mdash; or who I'd need.&rdquo;
         </div>
         <p>You don't have a specialist department for every problem. SolverSearch gives you a shortlist you can trust, without weeks of referrals.</p>
       </div>
@@ -1063,7 +1084,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <div class="uc-who">Consultants &amp; advisors</div>
         <div class="uc-q">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          &ldquo;Map the dominant approaches and players in climate fintech.&rdquo;
+          &ldquo;My client wants a position in climate fintech. All I have is a vague brief.&rdquo;
         </div>
         <p>Turn a vague brief into a structured market map — who matters, how they compare, and where the gaps are.</p>
       </div>
@@ -1071,7 +1092,7 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <div class="uc-who">Operators</div>
         <div class="uc-q">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
-          &ldquo;Which tools should I actually trust for a 50-person rollout?&rdquo;
+          &ldquo;Our 50-person team is drowning in manual work. I don't even know what the fix looks like.&rdquo;
         </div>
         <p>Cut through vendor marketing. Compare options on relevance and real-world trust signals, then decide with evidence.</p>
       </div>
@@ -1167,16 +1188,16 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
         <a class="f-mail" href="mailto:dinesh@solversearch.com">dinesh@solversearch.com</a>
       </div>
       <div class="founder-card reveal">
-        <div class="f-av g2">AP</div>
-        <h3>Anivrut <span class="f-role">Co-founder &middot; CFO</span></h3>
-        <p>Anivrut runs the financial engine &mdash; modelling, fundraising, and investor relations. He keeps the ambition funded and the growth honest, so the company scales as sustainably as it searches.</p>
-        <a class="f-mail" href="mailto:anivrut@solversearch.com">anivrut@solversearch.com</a>
-      </div>
-      <div class="founder-card reveal">
         <div class="f-av g3">AS</div>
         <h3>Aditya <span class="f-role">Co-founder &middot; CTO</span></h3>
         <p>Aditya builds the platform &mdash; search, SolverScore, and the AI matching engine. He turns research methodology into working software: a product you can type a real problem into and trust what comes back.</p>
         <a class="f-mail" href="mailto:aditya@solversearch.com">aditya@solversearch.com</a>
+      </div>
+      <div class="founder-card reveal">
+        <div class="f-av g2">AP</div>
+        <h3>Anivrut <span class="f-role">Co-founder &middot; CFO</span></h3>
+        <p>Anivrut runs the financial engine &mdash; modelling, fundraising, and investor relations. He keeps the ambition funded and the growth honest, so the company scales as sustainably as it searches.</p>
+        <a class="f-mail" href="mailto:anivrut@solversearch.com">anivrut@solversearch.com</a>
       </div>
     </div>
   </div>
@@ -1607,6 +1628,66 @@ html[data-theme="light"] .theme-toggle .i-moon { display: block; }
       input.select();
     }
   });
+
+  /* SolverScore: dynamic re-weighting demo */
+  var ssSection = document.getElementById('solverscore');
+  var ssQText = document.getElementById('ssQueryText');
+  var ssScoreEl = document.getElementById('bigScore');
+  var ssFillEl = document.getElementById('bigFill');
+  if (ssSection && ssQText && ssScoreEl && ssFillEl) {
+    var SS_DASH = 603.2;
+    var ssFactors = Array.prototype.slice.call(document.querySelectorAll('#factorsBox .factor'));
+    var ssScenarios = [
+      { q: 'I want to open an online store for my bakery — where do I start?', score: 912, w: [35, 20, 20, 15, 10] },
+      { q: 'Who can I actually trust to restructure my family\'s savings?', score: 941, w: [25, 15, 10, 10, 40] },
+      { q: 'Our checkout is broken and the sale launches in 48 hours.', score: 897, w: [25, 10, 40, 10, 15] },
+      { q: 'I need EU regulatory approval for a new medical device.', score: 926, w: [50, 15, 10, 10, 15] }
+    ];
+    if (!reduced) {
+      var ssIdx = 0, ssStarted = false;
+      var ssTween = function (el, to, suffix) {
+        var from = parseInt(el.textContent, 10) || 0;
+        var t0 = null, dur = 1100;
+        function step(ts) {
+          if (!t0) t0 = ts;
+          var p = Math.min((ts - t0) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(from + (to - from) * eased) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      };
+      var ssApply = function (s) {
+        ssTween(ssScoreEl, s.score, '');
+        ssFillEl.style.strokeDashoffset = (SS_DASH * (1 - s.score / 1000)).toFixed(2);
+        ssFactors.forEach(function (f, i) {
+          ssTween(f.querySelector('.w'), s.w[i], '%');
+          f.querySelector('.factor-fill').style.width = s.w[i] + '%';
+        });
+      };
+      var ssNext = function () {
+        if (document.hidden) return;
+        ssIdx = (ssIdx + 1) % ssScenarios.length;
+        var s = ssScenarios[ssIdx];
+        ssQText.classList.add('out');
+        setTimeout(function () {
+          ssQText.textContent = s.q;
+          ssQText.classList.remove('out');
+          ssApply(s);
+        }, 360);
+      };
+      var ssIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !ssStarted) {
+            ssStarted = true;
+            setTimeout(function () { setInterval(ssNext, 5200); }, 4000);
+            ssIO.disconnect();
+          }
+        });
+      }, { threshold: 0.3 });
+      ssIO.observe(ssSection);
+    }
+  }
 
   /* Careers modal */
   var crOverlay = document.getElementById('careersModal');
