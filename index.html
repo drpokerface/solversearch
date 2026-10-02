@@ -897,8 +897,9 @@ html[data-theme="light"] .sv-main { box-shadow: 0 16px 38px rgba(15, 23, 42, .11
 /* ---------- Homepage copy update: hero, problem framing, comparison ---------- */
 
 /* Hero headline: a set lead line, then the answer typed in */
-.hero-title { font-size: clamp(2.2rem, 5.6vw, 4.15rem); line-height: 1.08; max-width: 1060px; }
-.h-lead { display: block; color: var(--dim); margin-bottom: .1em; font-size: .8em; text-wrap: balance; }
+.hero-title { font-size: clamp(1.85rem, 4.5vw, 3.375rem); line-height: 1.08; max-width: 1060px; }
+.h-lead { color: var(--dim); margin-bottom: .1em; font-size: .8em; }
+@media (min-width: 561px) { .br-m { display: none; } }
 .hero-title .headline-type { display: grid; }
 
 /* Core problem statement, introducing the search demo */
@@ -1108,7 +1109,10 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
 <header class="hero" id="top">
   <div class="wrap">
     <h1 class="reveal in hero-title" id="heroHeadline" aria-label="You bring the business problem. We find the best expert and get it solved.">
-      <span class="h-lead" aria-hidden="true">You bring the business problem.</span>
+      <span class="headline-type h-lead" aria-hidden="true">
+        <span class="h-sizer">You bring the<br class="br-m"> business problem.</span>
+        <span class="h-typed" id="hTyped1">You bring the<br class="br-m"> business problem.</span>
+      </span>
       <span class="headline-type" aria-hidden="true">
         <span class="h-sizer">We find the best expert<br class="br-d"> and get&nbsp;it&nbsp;<span class="tint">solved.</span></span>
         <span class="h-typed" id="hTyped">We find the best expert<br class="br-d"> and get&nbsp;it&nbsp;<span class="tint">solved.</span></span>
@@ -2217,10 +2221,12 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
     })();
   }
 
-  /* Hero headline: "You bring the business problem." is set; the answer types itself out once, no loop */
+  /* Hero headline: line 1 types in, holds for a moment, then line 2 types in below it. One pass, no loop. */
+  var hTyped1 = document.getElementById('hTyped1');
   var hTyped = document.getElementById('hTyped');
-  if (hTyped) {
-    var HP = [{ t: 'We find the best expert' }, { br: 1 }, { t: ' and get\u00a0it\u00a0' }, { t: 'solved.', cls: 'tint' }];
+  if (hTyped1 && hTyped) {
+    var HP1 = [{ t: 'You bring the' }, { br: 1, cls: 'br-m' }, { t: ' business problem.' }];
+    var HP2 = [{ t: 'We find the best expert' }, { br: 1 }, { t: ' and get\u00a0it\u00a0' }, { t: 'solved.', cls: 'tint' }];
     var hLen = function (segs) {
       var n = 0;
       segs.forEach(function (s) { if (s.t) n += s.t.length; });
@@ -2229,7 +2235,7 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
     var hRender = function (segs, n, caret) {
       var html = '', used = 0;
       segs.forEach(function (s) {
-        if (s.br) { if (n > used) html += '<br class="br-d">'; return; }
+        if (s.br) { if (n > used) html += '<br class="' + (s.cls || 'br-d') + '">'; return; }
         var take = Math.max(0, Math.min(s.t.length, n - used));
         if (take > 0) {
           var piece = s.t.slice(0, take);
@@ -2240,18 +2246,34 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
       return html + (caret ? '<span class="h-caret"></span>' : '');
     };
     if (!reduced) {
-      var HL = hLen(HP), hn = 0;
-      hTyped.innerHTML = hRender(HP, 0, true);
+      var HL1 = hLen(HP1), HL2 = hLen(HP2);
+      var hn = 0, hLine = 1;
+      hTyped1.innerHTML = hRender(HP1, 0, true);
+      hTyped.innerHTML = '';
       var hTick = function () {
         hn++;
-        hTyped.innerHTML = hRender(HP, hn, true);
-        if (hn === HL) {
-          setTimeout(function () { hTyped.innerHTML = hRender(HP, HL, false); }, 2600);
-          return;
+        if (hLine === 1) {
+          hTyped1.innerHTML = hRender(HP1, hn, true);
+          if (hn === HL1) {
+            /* hold on line 1, then drop the caret to line 2 */
+            setTimeout(function () {
+              hLine = 2; hn = 0;
+              hTyped1.innerHTML = hRender(HP1, HL1, false);
+              hTyped.innerHTML = hRender(HP2, 0, true);
+              setTimeout(hTick, 400);
+            }, 2000);
+            return;
+          }
+        } else {
+          hTyped.innerHTML = hRender(HP2, hn, true);
+          if (hn === HL2) {
+            setTimeout(function () { hTyped.innerHTML = hRender(HP2, HL2, false); }, 2600);
+            return;
+          }
         }
-        setTimeout(hTick, 46 + Math.random() * 40);
+        setTimeout(hTick, 42 + Math.random() * 40);
       };
-      setTimeout(hTick, 1150);
+      setTimeout(hTick, 750);
     }
   }
 
