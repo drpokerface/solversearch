@@ -1052,6 +1052,110 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
 }
 </style>
 <script>(function(){var t=null;try{t=localStorage.getItem('ss-theme')}catch(e){}if(t!=='light'&&t!=='dark'){var h=(new Date()).getHours();t=(h>=7&&h<19)?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
+<style>
+/* ---------- Hero search: try a search, then get prompted to join the waitlist ---------- */
+.hero-search { max-width: 640px; margin: 34px auto 0; }
+.hs-bar {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 7px 7px 20px; border-radius: 999px;
+  background: var(--input-bg); border: 1px solid var(--line);
+  box-shadow: 0 18px 50px rgba(2, 6, 16, .28);
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+.hs-bar:focus-within { border-color: rgba(56, 189, 248, .6); box-shadow: 0 0 0 4px rgba(56, 189, 248, .12), 0 18px 50px rgba(2, 6, 16, .28); }
+.hs-icon { flex-shrink: 0; color: var(--accent); }
+.hs-input {
+  flex: 1; min-width: 0; background: none; border: none; outline: none;
+  font: inherit; font-size: 1rem; font-weight: 500; color: var(--text-bright); padding: 10px 0;
+}
+.hs-input::placeholder { color: var(--dim-2); transition: opacity .3s ease; }
+.hs-input.ph-out::placeholder { opacity: 0; }
+.hs-go { padding: 12px 22px; flex-shrink: 0; }
+.hs-go[disabled] { cursor: progress; transform: none; }
+.hs-spin { display: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: hs-spin .7s linear infinite; }
+.hs-go.is-loading .hs-spin { display: inline-block; }
+.hs-go.is-loading .arrow { display: none; }
+@keyframes hs-spin { to { transform: rotate(360deg); } }
+.hero-search.shake .hs-bar { animation: shake .45s ease; }
+.hs-chips { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; margin-top: 14px; }
+.hs-try { font-size: .78rem; font-weight: 600; color: var(--dim-2); margin-right: 2px; }
+.hs-chip {
+  font-size: .8rem; font-weight: 500; color: var(--dim);
+  padding: 6px 13px; border-radius: 999px;
+  background: var(--card); border: 1px solid var(--line-soft);
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+.hs-chip:hover { color: var(--text-bright); border-color: rgba(125, 211, 252, .45); background: var(--card-strong); }
+.hero-search + .hero-ctas { margin-top: 30px; }
+
+/* Search results panel: scan 80M+ profiles, then blurred matches behind a lock */
+.hs-results {
+  max-width: 640px; margin: 16px auto 0; text-align: left;
+  background: var(--mock-bg); border: 1px solid var(--line); border-radius: 20px;
+  padding: 18px 18px 8px; box-shadow: 0 24px 60px rgba(2, 6, 16, .3);
+  animation: modal-in .4s cubic-bezier(.22,.61,.36,1);
+}
+.hs-results[hidden], .hsr-found[hidden], .hsr-scan[hidden] { display: none; }
+.hsr-scan { padding: 4px 4px 12px; }
+.hsr-status { display: flex; align-items: center; gap: 10px; font-size: .86rem; font-weight: 600; color: var(--text-bright); min-height: 1.5em; }
+.hsr-status span { transition: opacity .2s ease; }
+.hsr-pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); position: relative; flex-shrink: 0; }
+.hsr-pulse::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 1px solid var(--accent); animation: pulse 1.4s ease-out infinite; }
+.hsr-count { margin-top: 14px; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.hsr-count b { font-size: clamp(1.6rem, 4vw, 2.1rem); font-weight: 800; letter-spacing: -.03em; color: var(--text-bright); font-variant-numeric: tabular-nums; }
+.hsr-count span { font-size: .84rem; color: var(--dim); }
+.hsr-bar { margin-top: 12px; height: 4px; border-radius: 4px; background: var(--line-soft); overflow: hidden; }
+.hsr-bar i { display: block; height: 100%; width: 0; border-radius: 4px; background: linear-gradient(90deg, var(--accent-deep), var(--accent-2)); box-shadow: 0 0 12px rgba(56,189,248,.5); }
+.hsr-found { position: relative; }
+.hsr-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin: 2px 2px 12px; }
+.hsr-head .t { font-size: .86rem; font-weight: 700; color: var(--text-bright); display: inline-flex; align-items: center; gap: 8px; }
+.hsr-head .t svg { color: var(--st-accepted); }
+.hsr-head .r { font-size: .72rem; color: var(--dim-2); white-space: nowrap; }
+.hsr-head .r b { color: var(--accent); }
+.hsr-list .result-card { opacity: 0; transform: translateY(10px); transition: opacity .45s ease, transform .45s cubic-bezier(.22,.61,.36,1); }
+.hsr-list .result-card.in { opacity: 1; transform: none; }
+.hsr-list .result-card:hover { transform: none; border-color: var(--line-soft); background: rgba(148,163,184,.05); }
+.hsr-list .avatar, .hsr-list .r-info { filter: blur(6px); user-select: none; pointer-events: none; }
+.hsr-list .score-ring .fill { transition: stroke-dashoffset 1s cubic-bezier(.22,.61,.36,1); }
+.hsr-list { -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent 100%); mask-image: linear-gradient(180deg, #000 40%, transparent 100%); }
+.hsr-lock {
+  position: relative; margin-top: -54px; padding: 0 12px 16px;
+  display: flex; flex-direction: column; align-items: center; gap: 12px; text-align: center;
+  opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; pointer-events: none;
+}
+.hsr-lock.in { opacity: 1; transform: none; pointer-events: auto; }
+.hsr-lock p { font-size: .86rem; color: var(--dim); max-width: 340px; }
+.hsr-lock p b { color: var(--text-bright); }
+
+/* Waitlist prompt shown after a search */
+.sq-query {
+  margin: 18px 0 0; padding: 12px 16px; border-radius: 14px; text-align: left;
+  background: var(--modal-input-bg); border: 1px solid var(--line);
+  font-size: .9rem; font-weight: 500; color: var(--text-bright); line-height: 1.5;
+  display: flex; gap: 10px; align-items: flex-start; word-break: break-word;
+}
+.sq-query svg { flex-shrink: 0; margin-top: 3px; color: var(--accent); }
+.sq-steps { list-style: none; margin-top: 16px; display: grid; gap: 9px; text-align: left; }
+.sq-steps li { display: flex; align-items: center; gap: 10px; font-size: .85rem; color: var(--dim); }
+.sq-steps i {
+  width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--accent-dim); color: var(--accent); font-style: normal;
+}
+.sq-steps .sq-lock i { background: var(--card-strong); color: var(--dim-2); }
+.sq-steps .sq-lock { color: var(--dim-2); }
+
+@media (max-width: 560px) {
+  .hero-search { margin-top: 28px; }
+  .hs-bar { flex-wrap: wrap; border-radius: 22px; padding: 8px 8px 8px 16px; }
+  .hs-input { flex-basis: calc(100% - 40px); font-size: .95rem; }
+  .hs-go { width: 100%; }
+  .hs-chip:nth-of-type(n+3) { display: none; }
+  .hs-results { padding: 16px 12px 6px; }
+  .hsr-lock { margin-top: -40px; }
+  .hsr-list .r-badges { display: none; }
+}
+</style>
 </head>
 <body>
 
@@ -1147,6 +1251,41 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
         </li>
       </ol>
       <p class="flow-cap swap-fade" id="flowCap" aria-hidden="true"><b class="cap-step"></b><span class="cap-text">Describe your problem. We find the right expert, bring them in, and see the job through to payment.</span></p>
+    </div>
+    <form class="hero-search reveal in" id="heroSearch" role="search" autocomplete="off" novalidate>
+      <label class="sr-only" for="heroQuery">Describe your business problem</label>
+      <div class="hs-bar">
+        <svg class="hs-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input class="hs-input" id="heroQuery" type="text" maxlength="200" placeholder="Describe your business problem&hellip;" enterkeyhint="search">
+        <button type="submit" class="btn btn-primary hs-go" id="heroSearchGo"><span class="hs-go-label">Find solvers</span> <span class="hs-spin" aria-hidden="true"></span><span class="arrow" aria-hidden="true">&rarr;</span></button>
+      </div>
+      <div class="hs-chips">
+        <span class="hs-try">Try:</span>
+        <button type="button" class="hs-chip" data-q="Our checkout conversion dropped 30% this quarter">Checkout conversion dropped</button>
+        <button type="button" class="hs-chip" data-q="We need to be GDPR compliant before our EU launch">GDPR before EU launch</button>
+        <button type="button" class="hs-chip" data-q="Hiring senior engineers is taking us far too long">Hiring engineers is too slow</button>
+      </div>
+    </form>
+    <div class="hs-results" id="hsResults" hidden aria-live="polite">
+      <div class="hsr-scan" id="hsrScan">
+        <div class="hsr-status"><i class="hsr-pulse" aria-hidden="true"></i><span id="hsrStatus">Understanding your problem&hellip;</span></div>
+        <div class="hsr-count"><b id="hsrCount">0</b><span>of 80,000,000+ expert profiles searched</span></div>
+        <div class="hsr-bar" aria-hidden="true"><i id="hsrBar"></i></div>
+      </div>
+      <div class="hsr-found" id="hsrFound" hidden>
+        <div class="hsr-head">
+          <span class="t"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg><span><b id="hsrN">0</b> experts matched</span></span>
+          <span class="r">Ranked by <b>SolverScore</b></span>
+        </div>
+        <div class="hsr-list" id="hsrList" aria-hidden="true"></div>
+        <div class="hsr-lock" id="hsrLock">
+          <p><b>Your matches are ready.</b> Join the waitlist to unlock their profiles and invite them.</p>
+          <a class="btn btn-primary" id="hsrUnlock" href="waitlist.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+            Unlock my matches
+          </a>
+        </div>
+      </div>
     </div>
     <div class="hero-ctas reveal in">
       <a class="btn btn-primary" href="waitlist.html">Join the waitlist <span class="arrow">&rarr;</span></a>
@@ -1979,6 +2118,29 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="searchModal" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+  <div class="modal">
+    <button class="modal-close" id="searchClose" aria-label="Close">&#10005;</button>
+    <div class="m-icon">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.8L20 10l-6.1 1.2L12 17l-1.9-5.8L4 10l6.1-1.2L12 3z"/></svg>
+    </div>
+    <h3 id="searchTitle">Unlock your <span id="searchN">matches</span></h3>
+    <p>We found strong expert matches for your problem. SolverSearch is in private beta &mdash; join the waitlist and we'll send you these results first.</p>
+    <div class="sq-query">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <span id="searchEcho"></span>
+    </div>
+    <ul class="sq-steps">
+      <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></i>Problem diagnosed</li>
+      <li><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></i><span><b id="searchN2" style="color:var(--text-bright)">0</b> experts matched from 80M+ profiles</span></li>
+      <li class="sq-lock"><i><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></i>Full profiles, invites and project delivery</li>
+    </ul>
+    <div class="modal-cta">
+      <a class="btn btn-primary" id="searchWaitlist" href="waitlist.html">Join the waitlist <span class="arrow">&rarr;</span></a>
+    </div>
+    <p class="modal-waitlist">Free early access for the first wave of clients.<br>Not quite right? <a href="#" id="searchEdit">Edit your search</a></p>
+  </div>
+</div>
 <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 <script>
 (function () {
@@ -2489,6 +2651,167 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
       try { localStorage.setItem('ss-theme', next); } catch (e) {}
       syncThemeMeta();
     });
+  }
+})();
+</script>
+<script>
+/* Hero search: scan 80M+ profiles, show blurred matches, then prompt to join the waitlist */
+(function () {
+  'use strict';
+  var form = document.getElementById('heroSearch');
+  if (!form) return;
+  var $ = function (id) { return document.getElementById(id); };
+  var input = $('heroQuery'), go = $('heroSearchGo'), goLabel = go.querySelector('.hs-go-label');
+  var panel = $('hsResults'), scan = $('hsrScan'), found = $('hsrFound');
+  var statusEl = $('hsrStatus'), countEl = $('hsrCount'), barEl = $('hsrBar');
+  var listEl = $('hsrList'), lockEl = $('hsrLock'), unlock = $('hsrUnlock');
+  var overlay = $('searchModal'), echo = $('searchEcho'), cta = $('searchWaitlist');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TOTAL = 80000000, timers = [], raf = 0, run = 0;
+
+  function later(fn, ms) { timers.push(setTimeout(fn, reduced ? Math.min(ms, 200) : ms)); }
+  function clearAll() { timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf); }
+  function fmt(n) { return Math.round(n).toLocaleString('en-US'); }
+  function hash(s) { var x = 5381; for (var i = 0; i < s.length; i++) x = ((x << 5) + x + s.charCodeAt(i)) >>> 0; return x; }
+
+  var ROLES = [
+    [/convers|checkout|funnel|ads?\b|marketing|growth|churn|pricing|sales|seo|brand|retention/i,
+      ['Conversion rate specialist', 'Growth marketing lead', 'Pricing strategist', 'Lifecycle & retention advisor']],
+    [/gdpr|legal|complian|privacy|iso|soc ?2|contract|regulat|licen[cs]e|tax/i,
+      ['Data protection counsel', 'Compliance programme lead', 'Privacy engineer', 'Regulatory consultant']],
+    [/hir|recruit|talent|engineer|team|people|staff/i,
+      ['Fractional talent lead', 'Engineering hiring advisor', 'Technical recruiter', 'People operations consultant']],
+    [/supply|logist|cost|margin|operat|manufactur|procure|inventory/i,
+      ['Supply chain consultant', 'Operations turnaround advisor', 'Procurement specialist', 'Lean manufacturing expert']],
+    [/fund|invest|raise|valuation|cash|financ|cfo|runway/i,
+      ['Fundraising advisor', 'Fractional CFO', 'Financial modelling expert', 'Investor relations consultant']],
+    [/ai|data|ml|model|analytic|automat|software|app|product/i,
+      ['Applied AI consultant', 'Data platform architect', 'Product strategy lead', 'Automation engineer']]
+  ];
+  var DEFAULT_ROLES = ['Strategy consultant', 'Industry specialist', 'Fractional COO', 'Turnaround advisor'];
+  var NAMES = ['Elena Marchetti', 'Tomasz Wróbel', 'Priya Raman', 'Lukas Brandt', 'Sofia Lindqvist', 'Daniel Okafor', 'Ana Ferreira', 'Mihai Ionescu'];
+  var CITIES = ['Berlin', 'Warsaw', 'Lisbon', 'Bengaluru', 'Stockholm', 'London', 'Prague', 'Amsterdam'];
+  var AV = ['a1', 'a2', 'a3', 'a1'];
+
+  function rolesFor(q) {
+    for (var i = 0; i < ROLES.length; i++) if (ROLES[i][0].test(q)) return ROLES[i][1];
+    return DEFAULT_ROLES;
+  }
+
+  function cards(q) {
+    var h = hash(q.toLowerCase()), roles = rolesFor(q), out = '', score = 920 + (h % 50);
+    for (var i = 0; i < 3; i++) {
+      var name = NAMES[(h + i * 3) % NAMES.length], city = CITIES[(h + i * 5) % CITIES.length];
+      var ini = name.split(' ').map(function (w) { return w[0]; }).join('');
+      score -= 14 + ((h >> (i + 2)) % 19);
+      out += '<div class="result-card"><div class="avatar ' + AV[i] + '">' + ini + '</div>' +
+        '<div class="r-info"><div class="r-top"><span class="r-name">' + name + '</span></div>' +
+        '<div class="r-meta">' + roles[i] + ' &middot; ' + city + ' &middot; ' + (8 + (h >> i) % 14) + ' yrs experience</div>' +
+        '<div class="r-badges"><span class="r-badge">Verified sources</span><span class="r-badge">Responds fast</span></div></div>' +
+        '<div class="score-wrap"><div class="score-ring"><svg width="52" height="52" viewBox="0 0 52 52">' +
+        '<circle class="track" cx="26" cy="26" r="22" fill="none" stroke-width="4"/>' +
+        '<circle class="fill" cx="26" cy="26" r="22" fill="none" stroke-width="4" stroke-dasharray="138.2" stroke-dashoffset="138.2" data-s="' + score + '"/>' +
+        '</svg><span class="score-num">' + score + '</span></div><div class="score-cap">Score</div></div></div>';
+    }
+    return { html: out, n: 24 + (h % 53) };
+  }
+
+  function setLinks(q) {
+    var href = 'waitlist.html?q=' + encodeURIComponent(q);
+    cta.setAttribute('href', href); unlock.setAttribute('href', href);
+    try { sessionStorage.setItem('ss-query', q); } catch (e) {}
+  }
+
+  function openPrompt() { overlay.classList.add('open'); setTimeout(function () { cta.focus(); }, 60); }
+  function closePrompt() { overlay.classList.remove('open'); }
+
+  function done() { go.disabled = false; go.classList.remove('is-loading'); goLabel.textContent = 'Find solvers'; }
+
+  function search() {
+    var q = input.value.trim();
+    if (!q) {
+      form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake');
+      input.focus();
+      return;
+    }
+    clearAll(); closePrompt();
+    var me = ++run, res = cards(q);
+    setLinks(q);
+    echo.textContent = q;
+    $('searchN').textContent = res.n + ' matches';
+    $('searchN2').textContent = res.n;
+    $('hsrN').textContent = res.n;
+
+    go.disabled = true; go.classList.add('is-loading'); goLabel.textContent = 'Searching';
+    panel.hidden = false; scan.hidden = false; found.hidden = true;
+    lockEl.classList.remove('in'); listEl.innerHTML = '';
+    countEl.textContent = '0'; barEl.style.width = '0%';
+
+    var top = form.getBoundingClientRect().top + window.pageYOffset - 104;
+    if (Math.abs(window.pageYOffset - top) > 40) window.scrollTo({ top: top, behavior: reduced ? 'auto' : 'smooth' });
+
+    var steps = ['Understanding your problem…', 'Searching 80M+ expert profiles…', 'Checking track records & public work…', 'Ranking matches by SolverScore…'];
+    var DUR = reduced ? 300 : 3200;
+    steps.forEach(function (s, i) { later(function () { if (me === run) statusEl.textContent = s; }, i * DUR / steps.length); });
+
+    var t0 = performance.now();
+    (function tick(now) {
+      if (me !== run) return;
+      var k = Math.min(1, (now - t0) / DUR), e = 1 - Math.pow(1 - k, 3);
+      countEl.textContent = fmt(TOTAL * e);
+      barEl.style.width = (k * 100).toFixed(1) + '%';
+      if (k < 1) raf = requestAnimationFrame(tick);
+    })(t0);
+
+    later(function () {
+      if (me !== run) return;
+      done();
+      scan.hidden = true; found.hidden = false;
+      listEl.innerHTML = res.html;
+      listEl.querySelectorAll('.result-card').forEach(function (card, i) {
+        later(function () {
+          card.classList.add('in');
+          var c = card.querySelector('.fill');
+          c.style.strokeDashoffset = (138.2 * (1 - (+c.getAttribute('data-s')) / 1000)).toFixed(1);
+        }, 80 + i * 140);
+      });
+      later(function () { lockEl.classList.add('in'); }, 650);
+      later(function () { if (me === run) openPrompt(); }, 1700);
+    }, DUR + 150);
+  }
+
+  form.addEventListener('submit', function (e) { e.preventDefault(); search(); });
+  form.addEventListener('animationend', function () { form.classList.remove('shake'); });
+  form.querySelectorAll('.hs-chip').forEach(function (chip) {
+    chip.addEventListener('click', function () { input.value = chip.getAttribute('data-q'); search(); });
+  });
+
+  $('searchClose').addEventListener('click', closePrompt);
+  $('searchEdit').addEventListener('click', function (e) {
+    e.preventDefault(); closePrompt(); input.focus(); input.select();
+  });
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) closePrompt(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePrompt(); });
+
+  /* Rotating example placeholder while the box is empty and unfocused */
+  var examples = [
+    'Describe your business problem…',
+    'e.g. Our churn doubled after the pricing change',
+    'e.g. We need ISO 27001 before an enterprise deal',
+    'e.g. Paid ads stopped converting last month',
+    'e.g. Our supply chain costs are eating our margin'
+  ];
+  if (!reduced) {
+    var pi = 0;
+    setInterval(function () {
+      if (input.value || document.activeElement === input) return;
+      input.classList.add('ph-out');
+      setTimeout(function () {
+        pi = (pi + 1) % examples.length;
+        input.setAttribute('placeholder', examples[pi]);
+        input.classList.remove('ph-out');
+      }, 300);
+    }, 3200);
   }
 })();
 </script>
