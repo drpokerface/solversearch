@@ -1054,23 +1054,29 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
 <script>(function(){var t=null;try{t=localStorage.getItem('ss-theme')}catch(e){}if(t!=='light'&&t!=='dark'){var h=(new Date()).getHours();t=(h>=7&&h<19)?'light':'dark'}document.documentElement.setAttribute('data-theme',t)})();</script>
 <style>
 /* ---------- Hero search: try a search, then get prompted to join the waitlist ---------- */
-.hero-search { max-width: 640px; margin: 34px auto 0; }
+.hero-search { max-width: 720px; margin: 36px auto 0; }
 .hs-bar {
   display: flex; align-items: center; gap: 10px;
-  padding: 7px 7px 7px 20px; border-radius: 999px;
-  background: var(--input-bg); border: 1px solid var(--line);
-  box-shadow: 0 18px 50px rgba(2, 6, 16, .28);
-  transition: border-color .25s ease, box-shadow .25s ease;
+  padding: 9px 9px 9px 24px; border-radius: 999px;
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--hs-fill), var(--hs-fill)) padding-box,
+    linear-gradient(115deg, var(--accent-2), rgba(56, 189, 248, .35) 45%, var(--accent-deep)) border-box;
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, .07), 0 0 46px rgba(56, 189, 248, .22), 0 20px 50px rgba(2, 6, 16, .35);
+  transition: box-shadow .3s ease;
 }
-.hs-bar:focus-within { border-color: rgba(56, 189, 248, .6); box-shadow: 0 0 0 4px rgba(56, 189, 248, .12), 0 18px 50px rgba(2, 6, 16, .28); }
+.hs-bar:focus-within { box-shadow: 0 0 0 6px rgba(56, 189, 248, .14), 0 0 60px rgba(56, 189, 248, .32), 0 20px 50px rgba(2, 6, 16, .35); }
+:root { --hs-fill: #142340; }
+html[data-theme="light"] { --hs-fill: #ffffff; }
+html[data-theme="light"] .hs-bar { box-shadow: 0 0 0 6px rgba(2, 132, 199, .07), 0 0 40px rgba(2, 132, 199, .16), 0 18px 44px rgba(15, 23, 42, .1); }
+html[data-theme="light"] .hs-bar:focus-within { box-shadow: 0 0 0 6px rgba(2, 132, 199, .13), 0 0 50px rgba(2, 132, 199, .22), 0 18px 44px rgba(15, 23, 42, .1); }
 .hs-icon { flex-shrink: 0; color: var(--accent); }
 .hs-input {
   flex: 1; min-width: 0; background: none; border: none; outline: none;
-  font: inherit; font-size: 1rem; font-weight: 500; color: var(--text-bright); padding: 10px 0;
+  font: inherit; font-size: 1.12rem; font-weight: 500; color: var(--text-bright); padding: 14px 0;
 }
-.hs-input::placeholder { color: var(--dim-2); transition: opacity .3s ease; }
-.hs-input.ph-out::placeholder { opacity: 0; }
-.hs-go { padding: 12px 22px; flex-shrink: 0; }
+.hs-input::placeholder { color: var(--dim); }
+.hs-go { padding: 15px 28px; font-size: 1rem; flex-shrink: 0; }
 .hs-go[disabled] { cursor: progress; transform: none; }
 .hs-spin { display: none; width: 14px; height: 14px; border-radius: 50%; border: 2px solid currentColor; border-right-color: transparent; animation: hs-spin .7s linear infinite; }
 .hs-go.is-loading .hs-spin { display: inline-block; }
@@ -1090,7 +1096,7 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
 
 /* Search results panel: scan 80M+ profiles, then blurred matches behind a lock */
 .hs-results {
-  max-width: 640px; margin: 16px auto 0; text-align: left;
+  max-width: 720px; margin: 16px auto 0; text-align: left;
   background: var(--mock-bg); border: 1px solid var(--line); border-radius: 20px;
   padding: 18px 18px 8px; box-shadow: 0 24px 60px rgba(2, 6, 16, .3);
   animation: modal-in .4s cubic-bezier(.22,.61,.36,1);
@@ -1148,7 +1154,7 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
 @media (max-width: 560px) {
   .hero-search { margin-top: 28px; }
   .hs-bar { flex-wrap: wrap; border-radius: 22px; padding: 8px 8px 8px 16px; }
-  .hs-input { flex-basis: calc(100% - 40px); font-size: .95rem; }
+  .hs-input { flex-basis: calc(100% - 40px); font-size: 1rem; padding: 12px 0; }
   .hs-go { width: 100%; }
   .hs-chip:nth-of-type(n+3) { display: none; }
   .hs-results { padding: 16px 12px 6px; }
@@ -1255,7 +1261,7 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
     <form class="hero-search reveal in" id="heroSearch" role="search" autocomplete="off" novalidate>
       <label class="sr-only" for="heroQuery">Describe your business problem</label>
       <div class="hs-bar">
-        <svg class="hs-icon" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <svg class="hs-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
         <input class="hs-input" id="heroQuery" type="text" maxlength="200" placeholder="Describe your business problem&hellip;" enterkeyhint="search">
         <button type="submit" class="btn btn-primary hs-go" id="heroSearchGo"><span class="hs-go-label">Find solvers</span> <span class="hs-spin" aria-hidden="true"></span><span class="arrow" aria-hidden="true">&rarr;</span></button>
       </div>
@@ -2793,26 +2799,8 @@ html[data-theme="light"] .cmp-arrow { box-shadow: 0 0 0 4px var(--bg), 0 4px 12p
   overlay.addEventListener('click', function (e) { if (e.target === overlay) closePrompt(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePrompt(); });
 
-  /* Rotating example placeholder while the box is empty and unfocused */
-  var examples = [
-    'Describe your business problem…',
-    'e.g. Our churn doubled after the pricing change',
-    'e.g. We need ISO 27001 before an enterprise deal',
-    'e.g. Paid ads stopped converting last month',
-    'e.g. Our supply chain costs are eating our margin'
-  ];
-  if (!reduced) {
-    var pi = 0;
-    setInterval(function () {
-      if (input.value || document.activeElement === input) return;
-      input.classList.add('ph-out');
-      setTimeout(function () {
-        pi = (pi + 1) % examples.length;
-        input.setAttribute('placeholder', examples[pi]);
-        input.classList.remove('ph-out');
-      }, 300);
-    }, 3200);
-  }
+  /* Put the cursor in the search box as soon as the page loads */
+  try { input.focus({ preventScroll: true }); } catch (e) { input.focus(); }
 })();
 </script>
 </body>
